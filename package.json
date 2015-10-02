@@ -1,0 +1,38 @@
+{
+  "name": "qwebs-mongo",
+  "version": "0.0.16",
+  "description": "Mongo client for Qwebs server",
+  "main": "index.js",
+  "dependencies": {
+    "mongodb": "^2.0.42",
+    "q": "^1.4.1",
+    "qwebs": "^0.0.16"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beny78/qwebs-mongo.git"
+  },
+  "keywords": [
+    "qwebs",
+    "mongo",
+    "mongodb",
+    "client",
+    "web",
+    "database",
+    "promise",
+    "q"
+  ],
+  "author": {
+    "name": "Benoît Claveau",
+    "email": "beny78@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/beny78/qwebs-mongo/issues"
+  },
+  "homepage": "https://github.com/beny78/qwebs-mongo"
+}
