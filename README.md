@@ -18,7 +18,7 @@ Mongo client build over Promises for Qwebs server.
 
 ## Declare and inject the service $mongo in Qwebs
 
-```json
+```js
 var Qwebs = require("qwebs");
 var qwebs = new Qwebs();
 
@@ -27,7 +27,7 @@ qwebs.inject("$mongo" ,"qwebs-mongo");
 
 ## Use $mongo in your own service
 
-```json
+```js
 function MyService($mongo) {
   this.$mongo = $mongo;
 };
@@ -42,9 +42,30 @@ MyService.prototype.insert = function (request, response, promise) {
 
 exports = module.exports = MyService; //Return a class. Qwebs will instanciate it;
 ```
-  
+
+## API
+
+  * connect()
+  * createCollection(collectionName)
+  * drop(collectionName)
+  * ensureIndex(collectionName, index, options)
+  * dropIndex(collectionName, index)
+  * gridStore(objectId, mode, options)
+  * insert(collectionName, item)
+  * update(collectionName, criteria, update, option)
+  * remove(collectionName, selector)
+  * findOne(collectionName, query, fields)
+  * find(collectionName, query, options)
+  * find2(collectionName, query, meta, options) for meta like textScore
+  * count(collectionName, query, options)
+  * geoNear(collectionName, x, y, options)
+  * aggregate(collectionName, array)
+  * mapReduce(collectionName, map, reduce, options)
+  * initializeUnorderedBulkOp(collectionName)
+
 ## Installation
 
 ```bash
 $ npm install qwebs-mongo
 ```
+  
