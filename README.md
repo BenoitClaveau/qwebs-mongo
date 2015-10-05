@@ -1,7 +1,13 @@
 # qwebs-mongo
-Mongo client for Qwebs server
+Mongo client build over Promises for Qwebs server.
 
-## Add the mongo connection string in the qwebs config file (config.json)
+## Features
+
+  * Qwebs
+  * Mongo
+  * Promise
+    
+## Add the mongo connection string your Qwebs config file (config.json)
 ```json
 {
 	"mongo": {
@@ -36,12 +42,6 @@ MyService.prototype.insert = function (request, response, promise) {
 
 exports = module.exports = MyService; //Return a class. Qwebs will instanciate it;
 ```
-
-## Features
-
-  * Qwebs
-  * Mongo
-  * Promise
   
 ## Installation
 
