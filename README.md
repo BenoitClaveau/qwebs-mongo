@@ -1,11 +1,11 @@
 # qwebs-mongo
-> [Mongo wrapper] (https://www.npmjs.com/package/mongodb) build over Promises for [Qwebs server] (https://www.npmjs.com/package/qwebs).
+> [Mongo wrapper](https://www.npmjs.com/package/mongodb) build over Promises for [Qwebs server](https://www.npmjs.com/package/qwebs).
 
 ## Features
 
-  * [Qwebs] (https://www.npmjs.com/package/qwebs)
-  * [Mongo] (https://www.npmjs.com/package/mongodb)
-  * [Promise] (https://www.npmjs.com/package/q)
+  * [Qwebs](https://www.npmjs.com/package/qwebs)
+  * [Mongo](https://www.npmjs.com/package/mongodb)
+  * [Promise](https://www.npmjs.com/package/q)
     
 ### Add the mongo connection string your Qwebs config file (config.json)
 
@@ -63,7 +63,7 @@ exports = module.exports = MyService; //Return a class. Qwebs will instanciate i
   * aggregate(collectionName, array)
   * mapReduce(collectionName, map, reduce, options)
   * initializeUnorderedBulkOp(collectionName)
-  * [Mongo native API] (http://mongodb.github.io/node-mongodb-native/2.0/api/)
+  * [Mongo native API](http://mongodb.github.io/node-mongodb-native/2.0/api/)
 
 
 ## Installation
