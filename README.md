@@ -1,13 +1,14 @@
 # qwebs-mongo
-Mongo client build over Promises for Qwebs server.
+> [Mongo wrapper] (https://www.npmjs.com/package/mongodb) build over Promises for [Qwebs server] (https://www.npmjs.com/package/qwebs).
 
 ## Features
 
-  * Qwebs
-  * Mongo
-  * Promise
+  * [Qwebs] (https://www.npmjs.com/package/qwebs)
+  * [Mongo] (https://www.npmjs.com/package/mongodb)
+  * [Promise] (https://www.npmjs.com/package/q)
     
-## Add the mongo connection string your Qwebs config file (config.json)
+### Add the mongo connection string your Qwebs config file (config.json)
+
 ```json
 {
 	"mongo": {
@@ -16,7 +17,7 @@ Mongo client build over Promises for Qwebs server.
 }
 ```
 
-## Declare and inject the service $mongo in Qwebs
+### Declare and inject the service $mongo in Qwebs
 
 ```js
 var Qwebs = require("qwebs");
@@ -25,7 +26,7 @@ var qwebs = new Qwebs();
 qwebs.inject("$mongo" ,"qwebs-mongo");
 ```
 
-## Use $mongo in your own service
+### Use $mongo in your own service
 
 ```js
 function MyService($mongo) {
@@ -62,6 +63,8 @@ exports = module.exports = MyService; //Return a class. Qwebs will instanciate i
   * aggregate(collectionName, array)
   * mapReduce(collectionName, map, reduce, options)
   * initializeUnorderedBulkOp(collectionName)
+  * [Mongo native API] (http://mongodb.github.io/node-mongodb-native/2.0/api/)
+
 
 ## Installation
 
