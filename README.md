@@ -1,13 +1,13 @@
 # qwebs-mongo
-> [Mongo wrapper](https://www.npmjs.com/package/mongodb) build over Promises for [Qwebs server](https://www.npmjs.com/package/qwebs).
+> [Mongo](https://www.npmjs.com/package/mongodb) service build with [Promises](https://www.npmjs.com/package/q) for [Qwebs server](https://www.npmjs.com/package/qwebs).
 
 ## Features
 
   * [Qwebs](https://www.npmjs.com/package/qwebs)
   * [Mongo](https://www.npmjs.com/package/mongodb)
-  * [Promise](https://www.npmjs.com/package/q)
+  * [Promises](https://www.npmjs.com/package/q)
     
-### Add the mongo connection string your Qwebs config file (config.json)
+### Add the mongo connection string in config.json
 
 ```json
 {
@@ -17,7 +17,7 @@
 }
 ```
 
-### Declare and inject the service $mongo in Qwebs
+### Declare and inject $mongo
 
 ```js
 var Qwebs = require("qwebs");
@@ -26,7 +26,7 @@ var qwebs = new Qwebs();
 qwebs.inject("$mongo" ,"qwebs-mongo");
 ```
 
-### Use $mongo in your own service
+### Use $mongo service
 
 ```js
 function MyService($mongo) {
