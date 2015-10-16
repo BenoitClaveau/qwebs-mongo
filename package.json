@@ -6,7 +6,7 @@
   "dependencies": {
     "mongodb": "^2.0.45",
     "q": "^1.4.1",
-    "qwebs": "^0.0.22"
+    "qwebs": "^0.0.24"
   },
   "devDependencies": {},
   "scripts": {
