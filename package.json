@@ -1,12 +1,12 @@
 {
   "name": "qwebs-mongo",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "Mongo client for your Qwebs server",
   "main": "index.js",
   "dependencies": {
     "mongodb": "^2.1.0",
     "q": "^1.4.1",
-    "qwebs": "^0.0.26"
+    "qwebs": "^0.0.27"
   },
   "devDependencies": {},
   "scripts": {
