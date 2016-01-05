@@ -1,5 +1,5 @@
 # qwebs-mongo
-> [Mongo](https://www.npmjs.com/package/mongodb) service build with [Promises](https://www.npmjs.com/package/q) for [Qwebs server](https://www.npmjs.com/package/qwebs).
+[Mongo](https://www.npmjs.com/package/mongodb) service build with [Promises](https://www.npmjs.com/package/q) for [Qwebs server](https://www.npmjs.com/package/qwebs).
 
 ## Features
 
@@ -44,7 +44,7 @@ MyService.prototype.insert = function (request, response, promise) {
 exports = module.exports = MyService; //Return a class. Qwebs will instanciate it;
 ```
 
-## API
+## Promise API
 
   * connect()
   * createCollection(collectionName)
