@@ -8,9 +8,11 @@
         "q": "^1.4.1",
         "qwebs": "^0.0.33"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "jasmine-node": "^2.0.0"
+    },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "node_modules/jasmine-node/bin/jasmine-node tests"
     },
     "repository": {
         "type": "git",
