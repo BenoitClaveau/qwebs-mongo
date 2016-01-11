@@ -41,24 +41,21 @@ describe("A suite for stream", function () {
                 
                 var stream = cursor.stream();
      
-                stream.on("data", function(user) {
-                    console.log("user:", user);
-                });
-                
                 stream.once("end", function() {
                     console.log("Stream completed");
                     done();
                 });
                 
                 stream.on("error", function(error) {
-                    console.log("ERROR");
                     done();
+                    console.log("ERROR");
                 });
                 
                 return stream;
             });
         }).then(function(stream) {
             console.log("Continue to use stream");
+
         }).catch(function (error) {
             expect(error.stack).toBeNull();
         }).finally();
@@ -73,11 +70,7 @@ describe("A suite for stream", function () {
                 return cursor.stream().pipe(new ExtendUser($mongo, {objectMode: true}));
             });
         }).then(function(stream) {
-            
-             stream.on("data", function(user) {
-                console.log("user:", user);
-            });
-                
+              
             stream.once("finish", function() { //Not end but finish
                 console.log("finish");
                 done();

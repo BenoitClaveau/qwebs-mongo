@@ -38,7 +38,6 @@ describe("A suite for bucket", function () {
                 return uploadStream;
             }).then(function(uploadStream) {
                 var filepath = path.join(__dirname, "data/world.png")
-                console.log("filepath:", filepath)
                 fs.createReadStream(filepath).pipe(uploadStream);
             });
             
@@ -61,8 +60,6 @@ describe("A suite for bucket", function () {
                 return $mongo.gridFSBucket({bucketName: "images"}).then(function(bucket) {
                     return bucket.openDownloadStreamByName("test.png");
                 }).then(function(downloadStream) {
-                    
-                    console.log("id:", downloadStream.id);
                     downloadStream.once('end', function() {
                         console.log("Completed");
                         done();
