@@ -1,6 +1,10 @@
 # qwebs-mongo
 [Mongo](https://www.npmjs.com/package/mongodb) service build with [Promises](https://www.npmjs.com/package/q) for [Qwebs server](https://www.npmjs.com/package/qwebs).
 
+ [![NPM][npm-image]][npm-url]
+ [![Build Status][travis-image]][travis-url]
+ [![Coverage Status][coveralls-image]][coveralls-url]
+
 ## Features
 
   * [Qwebs](https://www.npmjs.com/package/qwebs)
@@ -52,6 +56,7 @@ exports = module.exports = MyService; //Return a class. Qwebs will instanciate i
   * ensureIndex(collectionName, index, options)
   * dropIndex(collectionName, index)
   * gridStore(objectId, mode, options)
+  * gridFsBusket(options)
   * insert(collectionName, item)
   * update(collectionName, criteria, update, option)
   * remove(collectionName, selector)
@@ -63,12 +68,29 @@ exports = module.exports = MyService; //Return a class. Qwebs will instanciate i
   * aggregate(collectionName, array)
   * mapReduce(collectionName, map, reduce, options)
   * initializeUnorderedBulkOp(collectionName)
-  * [Mongo native API](http://mongodb.github.io/node-mongodb-native/2.0/api/)
-
+  * [Mongo native API](http://mongodb.github.io/node-mongodb-native/2.1/api/)
 
 ## Installation
 
 ```bash
 $ npm install qwebs-mongo
 ```
-  
+
+## Test
+
+To run our tests, clone the qwebs-mongo repo and install the dependencies.
+
+```bash
+$ git clone https://github.com/beny78/qwebs-mongo --depth 1
+$ cd qwebs-mongo
+$ npm install
+$ mongod --dbpath ./data/db
+$ node.exe "..\node_modules\jasmine-node\bin\jasmine-node" --verbose tests
+```
+
+[npm-image]: https://img.shields.io/npm/v/qwebs-mongo.svg
+[npm-url]: https://npmjs.org/package/qwebs-mongo
+[travis-image]: https://travis-ci.org/beny78/qwebs-mongo.svg?branch=master
+[travis-url]: https://travis-ci.org/beny78/qwebs-mongo
+[coveralls-image]: https://coveralls.io/repos/beny78/qwebs-mongo/badge.svg?branch=master&service=github
+[coveralls-url]: https://coveralls.io/github/beny78/qwebs-mongo?branch=master
