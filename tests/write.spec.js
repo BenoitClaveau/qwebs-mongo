@@ -7,10 +7,12 @@ var path = require("path"),
 describe("A suite for write", function () {
 
     it("setup", function (done) {
-        
+  
         return setup.run().then(function() {
+            
             var $mongo = setup.qwebs.resolve("$mongo");
             $mongo.connect();
+
         }).catch(function (error) {
             expect(error.stack).toBeNull();
         }).finally(done);

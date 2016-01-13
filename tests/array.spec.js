@@ -9,7 +9,7 @@ var path = require("path"),
 describe("A suite for array", function () {
 
     it("setup", function (done) {
-        
+
         return setup.run().then(function() {
             
             var $mongo = setup.qwebs.resolve("$mongo");
@@ -26,7 +26,7 @@ describe("A suite for array", function () {
             };
             
             return Q.all(promises);
-            
+
         }).catch(function (error) {
             expect(error.stack).toBeNull();
         }).finally(done);

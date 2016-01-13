@@ -8,9 +8,8 @@ var path = require("path"),
     Q = require("q");
 
 function Setup () {
-    this.qwebs = new Qwebs({dirname: __dirname}); //force dirname
-    
-    this.qwebs.inject("$mongo", "./../index");
+    this.$qwebs = new Qwebs({dirname: __dirname});
+    this.$qwebs.inject("$mongo", "./../index"); 
 };
 
 Setup.prototype.run = function() {
@@ -28,7 +27,7 @@ Setup.prototype.run = function() {
 };
 
 Setup.prototype.loadQwebs = function() {
-    return this.qwebs.load();
+    return this.$qwebs.load();
 };
 
 Setup.prototype.mongoConnect = function() {
@@ -36,8 +35,8 @@ Setup.prototype.mongoConnect = function() {
     
     return Q.try(function() {
         
-        var $config = self.qwebs.resolve("$config");
-        var $mongo = self.qwebs.resolve("$mongo");
+        var $config = self.$qwebs.resolve("$config");
+        var $mongo = self.$qwebs.resolve("$mongo");
         
         if ($config.mongo.connectionString !== "mongodb://localhost:27017/test") throw new DataError({ message: "Inconherent mongo connectionString." });
         
@@ -46,7 +45,7 @@ Setup.prototype.mongoConnect = function() {
 };
 
 Setup.prototype.schema = function() {
-    var $mongo = this.qwebs.resolve("$mongo");
+    var $mongo = this.$qwebs.resolve("$mongo");
     
     return Q.all([
         $mongo.createCollection("users"),
@@ -59,7 +58,7 @@ Setup.prototype.injectData = function () {
     
     return Q.try(function() {
         
-        var $mongo = self.qwebs.resolve("$mongo");
+        var $mongo = self.$qwebs.resolve("$mongo");
         
     }).then(function () {
         console.log("-------------------------------------------------");
@@ -74,7 +73,7 @@ Setup.prototype.injectData = function () {
 };
 
 Setup.prototype.clear = function () {
-    var $mongo = this.qwebs.resolve("$mongo");
+    var $mongo = this.$qwebs.resolve("$mongo");
     
     var promises = [];
     [
@@ -87,4 +86,4 @@ Setup.prototype.clear = function () {
     return Q.all(promises);
 };
 
-exports = module.exports = new Setup();
+exports = module.exports = Setup;

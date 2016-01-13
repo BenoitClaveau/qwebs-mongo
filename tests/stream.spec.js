@@ -9,9 +9,9 @@ var path = require("path"),
 describe("A suite for stream", function () {
 
     it("setup", function (done) {
-        
+          
         return setup.run().then(function() {
-            
+        
             var $mongo = setup.qwebs.resolve("$mongo");
             
             var promises = [];
@@ -26,7 +26,7 @@ describe("A suite for stream", function () {
             };
             
             return Q.all(promises);
-            
+ 
         }).catch(function (error) {
             expect(error.stack).toBeNull();
         }).finally(done);
