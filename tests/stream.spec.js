@@ -12,7 +12,7 @@ describe("A suite for stream", function () {
           
         return new Setup().run().then(function(setup) {
         
-            var $mongo = setup.qwebs.resolve("$mongo");
+            var $mongo = setup.$qwebs.resolve("$mongo");
             
             var promises = [];
             
@@ -35,7 +35,7 @@ describe("A suite for stream", function () {
     it("stream", function (done) {
         
         return Q.try(function() {
-            var $mongo = setup.qwebs.resolve("$mongo");
+            var $mongo = setup.$qwebs.resolve("$mongo");
             
             return $mongo.find("users").then(function(cursor) {
                 
@@ -64,7 +64,7 @@ describe("A suite for stream", function () {
     it("transform stream", function (done) {
         
         return Q.try(function() {
-            var $mongo = setup.qwebs.resolve("$mongo");
+            var $mongo = setup.$qwebs.resolve("$mongo");
             
             return $mongo.find("users").then(function(cursor) {
                 return cursor.stream().pipe(new ExtendUser($mongo, {objectMode: true}));
