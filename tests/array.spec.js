@@ -35,7 +35,7 @@ describe("A suite for array", function () {
     it("array", function (done) {
         
         return Q.try(function() {
-            var $mongo = setup.qwebs.resolve("$mongo");
+            var $mongo = setup.$qwebs.resolve("$mongo");
             
             return $mongo.find("users").then(function(cursor) {
                 return Q.ninvoke(cursor, 'toArray').then(function(users) {
@@ -50,7 +50,7 @@ describe("A suite for array", function () {
     it("array on none existing collection", function (done) {
         
         return Q.try(function() {
-            var $mongo = setup.qwebs.resolve("$mongo");
+            var $mongo = setup.$qwebs.resolve("$mongo");
             
             return $mongo.find("users2").then(function(cursor) {
                 return Q.ninvoke(cursor, 'toArray').then(function(users) {
