@@ -88,4 +88,6 @@ Setup.prototype.clear = function () {
     return Q.all(promises);
 };
 
-exports = module.exports = Setup;
+exports = module.exports = function () {
+    return new Setup();
+};
