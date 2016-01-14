@@ -10,7 +10,7 @@ describe("A suite for array", function () {
 
     it("setup", function (done) {
 
-        return new Setup().run().then(function() {
+        return new Setup().run().then(function(setup) {
             
             var $mongo = setup.qwebs.resolve("$mongo");
             
