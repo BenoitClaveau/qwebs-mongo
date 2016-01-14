@@ -23,6 +23,8 @@ Setup.prototype.run = function() {
         return self.schema();
     }).then(function() {
         return self.injectData();
+    }).then(function() {
+        return self;
     });
 };
 
