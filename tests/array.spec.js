@@ -12,7 +12,7 @@ describe("A suite for array", function () {
 
         return new Setup().run().then(function(setup) {
             
-            var $mongo = setup.qwebs.resolve("$mongo");
+            var $mongo = setup.$qwebs.resolve("$mongo");
             
             var promises = [];
             
