@@ -2,8 +2,8 @@ var path = require("path"),
     setup = require("./setup"),
     ObjectId = require("mongodb").ObjectID,
     fs = require("fs"),
-    stream = require('stream'),
-    util = require('util'),
+    stream = require("stream"),
+    util = require("util"),
     Q = require("q"); 
 
 describe("A suite for array", function () {
@@ -38,7 +38,7 @@ describe("A suite for array", function () {
             var $mongo = setup.$qwebs.resolve("$mongo");
             
             return $mongo.find("users").then(function(cursor) {
-                return Q.ninvoke(cursor, 'toArray').then(function(users) {
+                return Q.ninvoke(cursor, "toArray").then(function(users) {
                     expect(users.length).toEqual(5);
                 });
             });            
@@ -53,7 +53,7 @@ describe("A suite for array", function () {
             var $mongo = setup.$qwebs.resolve("$mongo");
             
             return $mongo.find("users2").then(function(cursor) {
-                return Q.ninvoke(cursor, 'toArray').then(function(users) {
+                return Q.ninvoke(cursor, "toArray").then(function(users) {
                     expect(users.length).toEqual(0);
                 });
             });            

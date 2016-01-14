@@ -2,8 +2,8 @@ var path = require("path"),
     setup = require("./setup"),
     ObjectId = require("mongodb").ObjectID,
     fs = require("fs"),
-    stream = require('stream'),
-    util = require('util'),
+    stream = require("stream"),
+    util = require("util"),
     Q = require("q"); 
 
 //http://mongodb.github.io/node-mongodb-native/2.1/api/GridFSBucket.html
@@ -33,7 +33,7 @@ describe("A suite for bucket", function () {
             }).then(function(uploadStream) {
 
                 console.log("id:", uploadStream.id);
-                uploadStream.once('finish', function() {
+                uploadStream.once("finish", function() {
                     console.log("Completed");
                     done();
                 });
@@ -62,7 +62,7 @@ describe("A suite for bucket", function () {
                 return $mongo.gridFSBucket({bucketName: "images"}).then(function(bucket) {
                     return bucket.openDownloadStreamByName("test.png");
                 }).then(function(downloadStream) {
-                    downloadStream.once('end', function() {
+                    downloadStream.once("end", function() {
                         console.log("Completed");
                         done();
                     });

@@ -8,6 +8,7 @@ var path = require("path"),
     Q = require("q");
 
 function Setup () {
+    console.log("Create setup")
     this.$qwebs = new Qwebs({dirname: __dirname});
     this.$qwebs.inject("$mongo", "./../index"); 
 };
@@ -88,6 +89,4 @@ Setup.prototype.clear = function () {
     return Q.all(promises);
 };
 
-exports = module.exports = function () {
-    return new Setup();
-};
+exports = module.exports = new Setup();
