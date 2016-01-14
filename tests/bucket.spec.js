@@ -1,5 +1,5 @@
 var path = require("path"),
-    Setup = require("./setup"),
+    setup = require("./setup"),
     ObjectId = require("mongodb").ObjectID,
     fs = require("fs"),
     stream = require('stream'),
@@ -12,7 +12,7 @@ describe("A suite for bucket", function () {
 
     it("setup", function (done) {
          
-        return new Setup().run().then(function(setup) {
+        return setup.run().then(function() {
             
             var $mongo = setup.$qwebs.resolve("$mongo");
             $mongo.connect();
