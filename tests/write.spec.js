@@ -8,7 +8,7 @@ describe("A suite for write", function () {
 
     it("setup", function (done) {
   
-        return new Setup().run().then(function() {
+        return new Setup().run().then(function(setup) {
             
             var $mongo = setup.qwebs.resolve("$mongo");
             $mongo.connect();
