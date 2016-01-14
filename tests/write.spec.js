@@ -1,5 +1,5 @@
 var path = require("path"),
-    Setup = require("./setup"),
+    setup = require("./setup"),
     ObjectId = require("mongodb").ObjectID,
     fs = require("fs"),
     Q = require("q"); 
@@ -8,7 +8,7 @@ describe("A suite for write", function () {
 
     it("setup", function (done) {
   
-        return new Setup().run().then(function(setup) {
+        return setup.run().then(function() {
             
             var $mongo = setup.$qwebs.resolve("$mongo");
             $mongo.connect();
