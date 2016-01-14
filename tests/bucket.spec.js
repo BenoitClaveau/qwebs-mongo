@@ -14,7 +14,7 @@ describe("A suite for bucket", function () {
          
         return new Setup().run().then(function(setup) {
             
-            var $mongo = setup.qwebs.resolve("$mongo");
+            var $mongo = setup.$qwebs.resolve("$mongo");
             $mongo.connect();
             
         }).catch(function (error) {
@@ -26,7 +26,7 @@ describe("A suite for bucket", function () {
         
         return Q.try(function() {
             
-            var $mongo = setup.qwebs.resolve("$mongo");
+            var $mongo = setup.$qwebs.resolve("$mongo");
             
             return $mongo.gridFSBucket({bucketName: "images"}).then(function(bucket) {
                 return bucket.openUploadStream("test.png");
@@ -52,7 +52,7 @@ describe("A suite for bucket", function () {
         
         return Q.try(function() {
             
-            var $mongo = setup.qwebs.resolve("$mongo");
+            var $mongo = setup.$qwebs.resolve("$mongo");
             
             var output = path.join(__dirname, "data/world.dest.png");
             return Q.try(function() {
