@@ -10,7 +10,7 @@ describe("A suite for write", function () {
   
         return new Setup().run().then(function(setup) {
             
-            var $mongo = setup.qwebs.resolve("$mongo");
+            var $mongo = setup.$qwebs.resolve("$mongo");
             $mongo.connect();
 
         }).catch(function (error) {
@@ -21,7 +21,7 @@ describe("A suite for write", function () {
     it("insert and read", function (done) {
         
         return Q.try(function() {
-            var $mongo = setup.qwebs.resolve("$mongo");
+            var $mongo = setup.$qwebs.resolve("$mongo");
             
             var user = {
                 login: "user1",
