@@ -3,8 +3,8 @@ var path = require("path"),
     ObjectId = require("mongodb").ObjectID,
     fs = require("fs"),
     stream = require("stream"),
-    process = require("process"),
     util = require("util"),
+    WritableStream = require("qwebs").WritableStream,
     Q = require("q"); 
 
 describe("A suite for stream", function () {
@@ -33,33 +33,22 @@ describe("A suite for stream", function () {
         }).finally(done);
     });
     
-    // it("stream", function (done) {
-    //     
-    //     return Q.try(function() {
-    //         var $mongo = setup.$qwebs.resolve("$mongo");
-    //         
-    //         return $mongo.find("users").then(function(cursor) {
-    //             
-    //             var stream = cursor.stream();
-    //  
-    //             stream.once("end", function() {
-    //                 done();
-    //             });
-    //             
-    //             stream.on("error", function(error) {
-    //                 done();
-    //             });
-    //             
-    //             return stream;
-    //         });
-    //     }).then(function(stream) {
-    //         console.log("-----1111-------")
-    //         stream.pipe(process.stdout);
-    //         console.log("-----000000------")
-    //     }).catch(function (error) {
-    //         expect(error.stack).toBeNull();
-    //     }).finally();
-    // });
+    it("stream", function (done) {
+        
+        return Q.try(function() {
+            var $mongo = setup.$qwebs.resolve("$mongo");
+            
+            return $mongo.find("users").then(function(cursor) {
+                
+                var stream = cursor.stream();
+                var output = new WritableStream();
+                
+                return stream.pipe(output);
+            });
+        }).catch(function (error) {
+            expect(error.stack).toBeNull();
+        }).finally();
+    });
     
     it("transform stream", function (done) {
         
