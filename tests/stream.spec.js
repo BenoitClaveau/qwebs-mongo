@@ -33,22 +33,22 @@ describe("A suite for stream", function () {
         }).finally(done);
     });
     
-    it("stream", function (done) {
-        
-        return Q.try(function() {
-            var $mongo = setup.$qwebs.resolve("$mongo");
-            
-            return $mongo.find("users").then(function(cursor) {
-                
-                var stream = cursor.stream();
-                var output = new WritableStream();
-                
-                return stream.pipe(output);
-            });
-        }).catch(function (error) {
-            expect(error.stack).toBeNull();
-        }).finally();
-    });
+ //   it("stream", function (done) {
+ //       
+ //       return Q.try(function() {
+ //           var $mongo = setup.$qwebs.resolve("$mongo");
+ //           
+ //           return $mongo.find("users").then(function(cursor) {
+ //               
+ //               var stream = cursor.stream();
+ //               var output = new WritableStream();
+ //               
+ //              return stream.pipe(output);
+ //           });
+ //       }).catch(function (error) {
+ //           expect(error.stack).toBeNull();
+ //       }).finally();
+ //   });
     
     it("transform stream", function (done) {
         
