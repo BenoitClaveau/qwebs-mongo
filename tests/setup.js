@@ -1,4 +1,9 @@
-"use strict";
+/*!
+ * qwebs-mongo
+ * Copyright(c) 2016 Benoît Claveau
+ * MIT Licensed
+ */
+"use strict"
 
 const path = require("path");
 const setup = require("./setup");
@@ -6,6 +11,7 @@ const ObjectId = require("mongodb").ObjectID;
 const fs = require("fs");
 const stream = require("stream");
 const util = require("util");
+const Qwebs = require("qwebs");
 
 class Setup {
     constructor() {
@@ -35,8 +41,8 @@ class Setup {
     mongoConnect() {
         return Promise.resolve().then(() => {
             
-            var $config = this.$qwebs.resolve("$config");
-            var $mongo = this.$qwebs.resolve("$mongo");
+            let $config = this.$qwebs.resolve("$config");
+            let $mongo = this.$qwebs.resolve("$mongo");
             
             if ($config.mongo.connectionString !== "mongodb://localhost:27017/test") throw new DataError({ message: "Inconherent mongo connectionString." });
             
@@ -45,7 +51,7 @@ class Setup {
     };
 
     schema() {
-        var $mongo = this.$qwebs.resolve("$mongo");
+        let $mongo = this.$qwebs.resolve("$mongo");
         
         return Promise.all([
             $mongo.createCollection("users"),
@@ -56,7 +62,7 @@ class Setup {
     injectData() {
         return Promise.resolve().then(() => {
             
-            var $mongo = this.$qwebs.resolve("$mongo");
+            let $mongo = this.$qwebs.resolve("$mongo");
             
         }).then(() => {
             console.log("-------------------------------------------------");
@@ -71,9 +77,9 @@ class Setup {
     };
 
     clear() {
-        var $mongo = this.$qwebs.resolve("$mongo");
+        let $mongo = this.$qwebs.resolve("$mongo");
         
-        var promises = [];
+        let promises = [];
         
         [$mongo.remove("users")].forEach(promise => {
             promises.push(promise.catch(error => {

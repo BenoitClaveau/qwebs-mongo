@@ -1,11 +1,11 @@
 {
     "name": "qwebs-mongo",
-    "version": "0.1.11",
+    "version": "0.1.12",
     "description": "Mongo client for your Qwebs server",
     "main": "index.js",
     "dependencies": {
         "mongodb": "latest",
-        "qwebs": "^0.1.11"
+        "qwebs": "^0.1.12"
     },
     "devDependencies": {
         "jasmine-node": "latest",
@@ -13,7 +13,8 @@
         "istanbul": "latest"
     },
     "scripts": {
-        "test": "node node_modules/jasmine-node/bin/jasmine-node tests",
+        "pretest": "start mongod.exe --dbpath tests/data/db",
+        "test": "node node_modules/jasmine-node/bin/jasmine-node tests --verbose",
         "test-cover": "istanbul cover node_modules/jasmine-node/bin/jasmine-node --captureExceptions tests/*.spec.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
     },
     "repository": {

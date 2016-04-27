@@ -1,3 +1,10 @@
+/*!
+ * qwebs-mongo
+ * Copyright(c) 2016 Benoît Claveau
+ * MIT Licensed
+ */
+"use strict"
+
 const path = require("path");
 const setup = require("./setup");
 const ObjectId = require("mongodb").ObjectID;
@@ -13,19 +20,19 @@ describe("A suite for bucket", () => {
          
         return setup.run().then(() => {
             
-            var $mongo = setup.$qwebs.resolve("$mongo");
+            let $mongo = setup.$qwebs.resolve("$mongo");
             $mongo.connect();
             
         }).catch(error => {
             expect(error.stack).toBeNull();
-        }).finally(done);
+        }).then(done);
     });
     
     it("openUploadStream", done => {
         
         return Promise.resolve().then(() => {
             
-            var $mongo = setup.$qwebs.resolve("$mongo");
+            let $mongo = setup.$qwebs.resolve("$mongo");
             
             return $mongo.gridFSBucket({bucketName: "images"}).then(bucket => {
                 return bucket.openUploadStream("test.png");
@@ -38,22 +45,22 @@ describe("A suite for bucket", () => {
                 });
                 return uploadStream;
             }).then(uploadStream => {
-                var filepath = path.join(__dirname, "data/world.png")
+                let filepath = path.join(__dirname, "data/world.png")
                 fs.createReadStream(filepath).pipe(uploadStream);
             });
             
         }).catch(error => {
             expect(error.stack).toBeNull();
-        }).finally();
+        }).then(done);
     });
     
     it("openDownloadStreamByName", done => {
         
         return Promise.resolve().then(() => {
             
-            var $mongo = setup.$qwebs.resolve("$mongo");
+            let $mongo = setup.$qwebs.resolve("$mongo");
             
-            var output = path.join(__dirname, "data/world.dest.png");
+            let output = path.join(__dirname, "data/world.dest.png");
             return Promise.resolve().then(() => {
                 if(fs.existsSync(output)) return fs.unlinkSync(output);
             }).then(() => {
@@ -73,6 +80,6 @@ describe("A suite for bucket", () => {
             
         }).catch(error => {
             expect(error.stack).toBeNull();
-        }).finally();
+        }).then(done);
     });
 });

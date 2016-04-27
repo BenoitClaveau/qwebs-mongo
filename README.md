@@ -24,8 +24,8 @@
 ### Declare and inject $mongo
 
 ```js
-var Qwebs = require("qwebs");
-var qwebs = new Qwebs();
+const Qwebs = require("qwebs");
+const qwebs = new Qwebs();
 
 qwebs.inject("$mongo" ,"qwebs-mongo");
 ```
