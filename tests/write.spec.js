@@ -1,26 +1,25 @@
-var path = require("path"),
-    setup = require("./setup"),
-    ObjectId = require("mongodb").ObjectID,
-    fs = require("fs"),
-    Q = require("q"); 
+const path = require("path");
+const setup = require("./setup");
+const ObjectId = require("mongodb").ObjectID;
+const fs = require("fs");
+const stream = require("stream");
+const util = require("util");
 
-describe("A suite for write", function () {
+describe("A suite for write", () => {
 
-    it("setup", function (done) {
+    it("setup", done => {
   
-        return setup.run().then(function() {
-            
+        return setup.run().then(() => {
             var $mongo = setup.$qwebs.resolve("$mongo");
             $mongo.connect();
-
-        }).catch(function (error) {
+        }).catch(error => {
             expect(error.stack).toBeNull();
         }).finally(done);
     });
     
-    it("insert and read", function (done) {
+    it("insert and read", done => {
         
-        return Q.try(function() {
+        return Promise.resolve().then(() => {
             var $mongo = setup.$qwebs.resolve("$mongo");
             
             var user = {
@@ -28,15 +27,15 @@ describe("A suite for write", function () {
                 password: "password1"
             };
             
-            return $mongo.insert("users", user).then(function(newUser) {
+            return $mongo.insert("users", user).then(newUser => {
                 expect(newUser.login).toEqual(user.login);
                 
-                return $mongo.findOne("users", { "login": "user1"}).then(function(dbUser) {
+                return $mongo.findOne("users", { "login": "user1"}).then(dbUser => {
                     expect(dbUser.password).toEqual(user.password);
                 });
             });
             
-        }).catch(function (error) {
+        }).catch(error => {
             expect(error.stack).toBeNull();
         }).finally(done);
     });

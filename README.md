@@ -33,16 +33,16 @@ qwebs.inject("$mongo" ,"qwebs-mongo");
 ### Use $mongo service
 
 ```js
-function MyService($mongo) {
-  this.$mongo = $mongo;
-};
+class MyService {
+  constructor($mongo) {
+    this.$mongo = $mongo;
+  };
 
-MyService.prototype.insert = function (request, response, promise) {
-  return promise.then(function (self) { //read html body
-    return self.$mongo.insert("collectionName", request.body).then(function (data) {
+  insert(request, response) {
+    return self.$mongo.insert("collectionName", request.body).then(data => {
       return response.send({ request: request, content: data });
     });
-  });
+  );
 };
 
 exports = module.exports = MyService; //Return a class. Qwebs will instanciate it;

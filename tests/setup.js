@@ -1,92 +1,87 @@
 "use strict";
 
-var path = require("path"),
-    Qwebs = require("qwebs"),
-    DataError = require("qwebs").DataError,
-    ObjectId = require("mongodb").ObjectID,
-    fs = require("fs"),
-    Q = require("q");
+const path = require("path");
+const setup = require("./setup");
+const ObjectId = require("mongodb").ObjectID;
+const fs = require("fs");
+const stream = require("stream");
+const util = require("util");
 
-function Setup () {
-    console.log("Create setup")
-    this.$qwebs = new Qwebs({dirname: __dirname});
-    this.$qwebs.inject("$mongo", "./../index"); 
-};
+class Setup {
+    constructor() {
+        console.log("Create setup")
+        this.$qwebs = new Qwebs({dirname: __dirname});
+        this.$qwebs.inject("$mongo", "./../index"); 
+    };
 
-Setup.prototype.run = function() {
-    var self = this;
-    
-    return self.loadQwebs().then(function() {
-        return self.mongoConnect();
-    }).then(function() {
-        return self.clear();
-    }).then(function() {
-        return self.schema();
-    }).then(function() {
-        return self.injectData();
-    }).then(function() {
-        return self;
-    });
-};
+    run() {
+        return this.loadQwebs().then(() => {
+            return this.mongoConnect();
+        }).then(() => {
+            return this.clear();
+        }).then(() => {
+            return this.schema();
+        }).then(() => {
+            return this.injectData();
+        }).then(() => {
+            return this;
+        });
+    };
 
-Setup.prototype.loadQwebs = function() {
-    return this.$qwebs.load();
-};
+    loadQwebs() {
+        return this.$qwebs.load();
+    };
 
-Setup.prototype.mongoConnect = function() {
-    var self = this;
-    
-    return Q.try(function() {
+    mongoConnect() {
+        return Promise.resolve().then(() => {
+            
+            var $config = this.$qwebs.resolve("$config");
+            var $mongo = this.$qwebs.resolve("$mongo");
+            
+            if ($config.mongo.connectionString !== "mongodb://localhost:27017/test") throw new DataError({ message: "Inconherent mongo connectionString." });
+            
+            return $mongo.connect();
+        });
+    };
+
+    schema() {
+        var $mongo = this.$qwebs.resolve("$mongo");
         
-        var $config = self.$qwebs.resolve("$config");
-        var $mongo = self.$qwebs.resolve("$mongo");
-        
-        if ($config.mongo.connectionString !== "mongodb://localhost:27017/test") throw new DataError({ message: "Inconherent mongo connectionString." });
-        
-        return $mongo.connect();
-    });
-};
+        return Promise.all([
+            $mongo.createCollection("users"),
+            $mongo.ensureIndex("users", { "login": 1 })               
+        ]);
+    };
+    
+    injectData() {
+        return Promise.resolve().then(() => {
+            
+            var $mongo = this.$qwebs.resolve("$mongo");
+            
+        }).then(() => {
+            console.log("-------------------------------------------------");
+            console.log("data injection completed");
+            console.log("-------------------------------------------------");
+        }).catch(error => {
+            console.log("-------------------------------------------------");
+            if(e.data) console.log("Error:", e.message, JSON.stringify(e.data), e.stack);
+            else console.log("Error:", e.message, e.stack);
+            console.log("-------------------------------------------------");
+        });
+    };
 
-Setup.prototype.schema = function() {
-    var $mongo = this.$qwebs.resolve("$mongo");
-    
-    return Q.all([
-        $mongo.createCollection("users"),
-        $mongo.ensureIndex("users", { "login": 1 })               
-    ]);
-};
- 
-Setup.prototype.injectData = function () {
-    var self = this;
-    
-    return Q.try(function() {
+    clear() {
+        var $mongo = this.$qwebs.resolve("$mongo");
         
-        var $mongo = self.$qwebs.resolve("$mongo");
+        var promises = [];
         
-    }).then(function () {
-        console.log("-------------------------------------------------");
-        console.log("data injection completed");
-        console.log("-------------------------------------------------");
-    }).catch(function (e) {
-        console.log("-------------------------------------------------");
-        if(e.data) console.log("Error:", e.message, JSON.stringify(e.data), e.stack);
-        else console.log("Error:", e.message, e.stack);
-        console.log("-------------------------------------------------");
-    });
-};
-
-Setup.prototype.clear = function () {
-    var $mongo = this.$qwebs.resolve("$mongo");
-    
-    var promises = [];
-    [
-        $mongo.remove("users")
-    ].forEach(function(promise){
-        promises.push(promise.catch(function(error){
-            console.log("Warning", error.message);
-        }));
-    });
-    return Q.all(promises);
+        [$mongo.remove("users")].forEach(promise => {
+            promises.push(promise.catch(error => {
+                console.log("Warning", error.message);
+            }));
+        });
+        return Promise.all(promises);
+    };
 };
 
 exports = module.exports = new Setup();

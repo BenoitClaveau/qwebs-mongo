@@ -1,78 +1,77 @@
-var path = require("path"),
-    setup = require("./setup"),
-    ObjectId = require("mongodb").ObjectID,
-    fs = require("fs"),
-    stream = require("stream"),
-    util = require("util"),
-    Q = require("q"); 
+const path = require("path");
+const setup = require("./setup");
+const ObjectId = require("mongodb").ObjectID;
+const fs = require("fs");
+const stream = require("stream");
+const util = require("util");
 
 //http://mongodb.github.io/node-mongodb-native/2.1/api/GridFSBucket.html
 
-describe("A suite for bucket", function () {
+describe("A suite for bucket", () => {
 
-    it("setup", function (done) {
+    it("setup", done => {
          
-        return setup.run().then(function() {
+        return setup.run().then(() => {
             
             var $mongo = setup.$qwebs.resolve("$mongo");
             $mongo.connect();
             
-        }).catch(function (error) {
+        }).catch(error => {
             expect(error.stack).toBeNull();
         }).finally(done);
     });
     
-    it("openUploadStream", function (done) {
+    it("openUploadStream", done => {
         
-        return Q.try(function() {
+        return Promise.resolve().then(() => {
             
             var $mongo = setup.$qwebs.resolve("$mongo");
             
-            return $mongo.gridFSBucket({bucketName: "images"}).then(function(bucket) {
+            return $mongo.gridFSBucket({bucketName: "images"}).then(bucket => {
                 return bucket.openUploadStream("test.png");
-            }).then(function(uploadStream) {
+            }).then(uploadStream => {
 
                 console.log("id:", uploadStream.id);
-                uploadStream.once("finish", function() {
+                uploadStream.once("finish", () => {
                     console.log("Completed");
                     done();
                 });
                 return uploadStream;
-            }).then(function(uploadStream) {
+            }).then(uploadStream => {
                 var filepath = path.join(__dirname, "data/world.png")
                 fs.createReadStream(filepath).pipe(uploadStream);
             });
             
-        }).catch(function (error) {
+        }).catch(error => {
             expect(error.stack).toBeNull();
         }).finally();
     });
     
-    it("openDownloadStreamByName", function (done) {
+    it("openDownloadStreamByName", done => {
         
-        return Q.try(function() {
+        return Promise.resolve().then(() => {
             
             var $mongo = setup.$qwebs.resolve("$mongo");
             
             var output = path.join(__dirname, "data/world.dest.png");
-            return Q.try(function() {
-                if(fs.existsSync(output)) return Q.ninvoke(fs, "unlink", output);
-            }).then(function() {
+            return Promise.resolve().then(() => {
+                if(fs.existsSync(output)) return fs.unlinkSync(output);
+            }).then(() => {
 
-                return $mongo.gridFSBucket({bucketName: "images"}).then(function(bucket) {
+                return $mongo.gridFSBucket({bucketName: "images"}).then(bucket => {
                     return bucket.openDownloadStreamByName("test.png");
-                }).then(function(downloadStream) {
-                    downloadStream.once("end", function() {
+                }).then(downloadStream => {
+                    downloadStream.once("end", () => {
                         console.log("Completed");
                         done();
                     });
                     return downloadStream;
-                }).then(function(downloadStream) {
+                }).then(downloadStream => {
                     downloadStream.pipe(fs.createWriteStream(output));
                 });
             });
             
-        }).catch(function (error) {
+        }).catch(error => {
             expect(error.stack).toBeNull();
         }).finally();
     });

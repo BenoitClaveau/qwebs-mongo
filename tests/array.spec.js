@@ -1,16 +1,15 @@
-var path = require("path"),
-    setup = require("./setup"),
-    ObjectId = require("mongodb").ObjectID,
-    fs = require("fs"),
-    stream = require("stream"),
-    util = require("util"),
-    Q = require("q"); 
+const path = require("path");
+const setup = require("./setup");
+const ObjectId = require("mongodb").ObjectID;
+const fs = require("fs");
+const stream = require("stream");
+const util = require("util");
 
-describe("A suite for array", function () {
+describe("A suite for array", () => {
 
-    it("setup", function (done) {
+    it("setup", done => {
 
-        return setup.run().then(function() {
+        return setup.run().then(() => {
             
             var $mongo = setup.$qwebs.resolve("$mongo");
             
@@ -25,39 +24,39 @@ describe("A suite for array", function () {
                 promises.push($mongo.insert("users", user));
             };
             
-            return Q.all(promises);
+            return Promise.all(promises);
 
-        }).catch(function (error) {
+        }).catch(error => {
             expect(error.stack).toBeNull();
         }).finally(done);
     });
     
-    it("array", function (done) {
+    it("array", done => {
         
-        return Q.try(function() {
+        return Promise.resolve().then(() => {
             var $mongo = setup.$qwebs.resolve("$mongo");
             
-            return $mongo.find("users").then(function(cursor) {
-                return Q.ninvoke(cursor, "toArray").then(function(users) {
+            return $mongo.find("users").then(cursor => {
+                return cursor.toArray().then(users => {
                     expect(users.length).toEqual(5);
                 });
             });            
-        }).catch(function (error) {
+        }).catch(error => {
             expect(error.stack).toBeNull();
         }).finally(done);
     });
     
-    it("array on none existing collection", function (done) {
+    it("array on none existing collection", done => {
         
-        return Q.try(function() {
+        return Promise.resolve().then(() => {
             var $mongo = setup.$qwebs.resolve("$mongo");
             
-            return $mongo.find("users2").then(function(cursor) {
-                return Q.ninvoke(cursor, "toArray").then(function(users) {
+            return $mongo.find("users2").then(cursor => {
+                return cursor.toArray().then(users => {
                     expect(users.length).toEqual(0);
                 });
             });            
-        }).catch(function (error) {
+        }).catch(error => {
             expect(error.stack).toBeNull();
         }).finally(done);
     });

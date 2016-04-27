@@ -1,17 +1,15 @@
-var path = require("path"),
-    setup = require("./setup"),
-    ObjectId = require("mongodb").ObjectID,
-    fs = require("fs"),
-    stream = require("stream"),
-    util = require("util"),
-    WritableStream = require("qwebs").WritableStream,
-    Q = require("q"); 
+const path = require("path");
+const setup = require("./setup");
+const ObjectId = require("mongodb").ObjectID;
+const fs = require("fs");
+const stream = require("stream");
+const util = require("util");
 
-describe("A suite for stream", function () {
+describe("A suite for stream", () => {
 
-    it("setup", function (done) {
+    it("setup", done => {
           
-        return setup.run().then(function() {
+        return setup.run().then(() => {
         
             var $mongo = setup.$qwebs.resolve("$mongo");
             
@@ -28,70 +26,59 @@ describe("A suite for stream", function () {
             
             return Q.all(promises);
  
-        }).catch(function (error) {
+        }).catch(error => {
             expect(error.stack).toBeNull();
         }).finally(done);
     });
     
-    it("stream", function (done) {
+    it("stream", done => {
         
-        return Q.try(function() {
+        return Promise.resolve().then(() => {
             var $mongo = setup.$qwebs.resolve("$mongo");
             
-            return $mongo.find("users").then(function(cursor) {
+            return $mongo.find("users").then(curor => {
                 
                 var stream = cursor.stream();
                 var output = fs.createWriteStream("output2.json");
                 
                 stream.pipe(output)
-                    .on("end", function() {
-                        done();
-                    }).on("error", function() {
-                        done();
-                    });
+                    .on("end", done)
+                    .on("error", done);
             });
-        }).catch(function (error) {
+        }).catch(error => {
             expect(error.stack).toBeNull();
         }).finally();
     });
     
-    it("transform stream", function (done) {
+    it("transform stream", done => {
         
-        return Q.try(function() {
+        return Promise.resolve().then(() => {
             var $mongo = setup.$qwebs.resolve("$mongo");
             
-            return $mongo.find("users").then(function(cursor) {
+            return $mongo.find("users").then(curor => {
                 return cursor.stream().pipe(new ExtendUser($mongo, {objectMode: true}));
             });
-        }).then(function(stream) {
+        }).then(stream => {
               
-            stream.once("finish", function() { //Not end but finish
-                done();
-            });
-            
-            stream.on("error", function(error) {
-                done();
-            });
-                
-        }).catch(function (error) {
+            stream.once("finish", done);
+            stream.once("error", done);
+           
+        }).catch(error => {
             expect(error.stack).toBeNull();
         }).finally();
     });
 });
 
-function ExtendUser($mongo, options) {
-    stream.Transform.call(this, options);
-    this.$mongo = $mongo;
-}
+class ExtendUser extends stream.Transform {
+    constructor($mongo, options) {
+        super(options);
+        this.$mongo = $mongo;
+    }
 
-util.inherits(ExtendUser, stream.Transform);
-
-ExtendUser.prototype._transform = function (chunk, enc, cb) {
-    var self = this;
-    self.$mongo.findOne("users", { login: chunk.login }).then(function(user) {
-        user.date = new Date();
-        self.push(user);
-    }).finally(function() {
-        cb();
-    });
+    _transform(chunk, enc, cb) {
+        self.$mongo.findOne("users", { login: chunk.login }).then(user => {
+            user.date = new Date();
+            this.push(user);
+        }).then(cb);
+    };
 };
