@@ -81,7 +81,7 @@ $ npm install qwebs-mongo
 To run our tests, clone the qwebs-mongo repo and install the dependencies.
 
 ```bash
-$ git clone https://github.com/beny78/qwebs-mongo --depth 1
+$ git clone https://github.com/BenoitClaveau/qwebs-mongo --depth 1
 $ cd qwebs-mongo
 $ npm install
 $ mongod --dbpath ./data/db
@@ -90,7 +90,7 @@ $ node.exe "..\node_modules\jasmine-node\bin\jasmine-node" --verbose tests
 
 [npm-image]: https://img.shields.io/npm/v/qwebs-mongo.svg
 [npm-url]: https://npmjs.org/package/qwebs-mongo
-[travis-image]: https://travis-ci.org/beny78/qwebs-mongo.svg?branch=master
-[travis-url]: https://travis-ci.org/beny78/qwebs-mongo
-[coveralls-image]: https://coveralls.io/repos/beny78/qwebs-mongo/badge.svg?branch=master&service=github
-[coveralls-url]: https://coveralls.io/github/beny78/qwebs-mongo?branch=master
+[travis-image]: https://travis-ci.org/BenoitClaveau/qwebs-mongo.svg?branch=master
+[travis-url]: https://travis-ci.org/BenoitClaveau/qwebs-mongo
+[coveralls-image]: https://coveralls.io/repos/BenoitClaveau/qwebs-mongo/badge.svg?branch=master&service=github
+[coveralls-url]: https://coveralls.io/github/BenoitClaveau/qwebs-mongo?branch=master
