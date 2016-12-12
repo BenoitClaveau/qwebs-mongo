@@ -45,8 +45,7 @@ class Setup {
             let $mongo = this.$qwebs.resolve("$mongo");
             
             if ($config.mongo.connectionString !== "mongodb://localhost:27017/test") throw new DataError({ message: "Inconherent mongo connectionString." });
-            
-            return $mongo.connect();
+            return $mongo.db;
         });
     };
 
@@ -54,8 +53,8 @@ class Setup {
         let $mongo = this.$qwebs.resolve("$mongo");
         
         return Promise.all([
-            $mongo.createCollection("users"),
-            $mongo.ensureIndex("users", { "login": 1 })               
+            $mongo.db.createCollection("users"),
+            $mongo.db.ensureIndex("users", { "login": 1 })               
         ]);
     };
     
@@ -81,7 +80,7 @@ class Setup {
         
         let promises = [];
         
-        [$mongo.remove("users")].forEach(promise => {
+        [$mongo.db.remove("users")].forEach(promise => {
             promises.push(promise.catch(error => {
                 console.log("Warning", error.message);
             }));

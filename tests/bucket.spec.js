@@ -21,65 +21,65 @@ describe("A suite for bucket", () => {
         return setup.run().then(() => {
             
             let $mongo = setup.$qwebs.resolve("$mongo");
-            $mongo.connect();
+            return $mongo.db;
             
         }).catch(error => {
             expect(error.stack).toBeNull();
         }).then(done);
     });
     
-    it("openUploadStream", done => {
+    // it("openUploadStream", done => {
         
-        return Promise.resolve().then(() => {
+    //     return Promise.resolve().then(() => {
             
-            let $mongo = setup.$qwebs.resolve("$mongo");
+    //         let $mongo = setup.$qwebs.resolve("$mongo");
             
-            return $mongo.gridFSBucket({bucketName: "images"}).then(bucket => {
-                return bucket.openUploadStream("test.png");
-            }).then(uploadStream => {
+    //         return $mongo.gridFSBucket({bucketName: "images"}).then(bucket => {
+    //             return bucket.openUploadStream("test.png");
+    //         }).then(uploadStream => {
 
-                console.log("id:", uploadStream.id);
-                uploadStream.once("finish", () => {
-                    console.log("Completed");
-                    done();
-                });
-                return uploadStream;
-            }).then(uploadStream => {
-                let filepath = path.join(__dirname, "data/world.png")
-                fs.createReadStream(filepath).pipe(uploadStream);
-            });
+    //             console.log("id:", uploadStream.id);
+    //             uploadStream.once("finish", () => {
+    //                 console.log("Completed");
+    //                 done();
+    //             });
+    //             return uploadStream;
+    //         }).then(uploadStream => {
+    //             let filepath = path.join(__dirname, "data/world.png")
+    //             fs.createReadStream(filepath).pipe(uploadStream);
+    //         });
             
-        }).catch(error => {
-            expect(error.stack).toBeNull();
-        }).then(done);
-    });
+    //     }).catch(error => {
+    //         expect(error.stack).toBeNull();
+    //     }).then(done);
+    // });
     
-    it("openDownloadStreamByName", done => {
+    // it("openDownloadStreamByName", done => {
         
-        return Promise.resolve().then(() => {
+    //     return Promise.resolve().then(() => {
             
-            let $mongo = setup.$qwebs.resolve("$mongo");
+    //         let $mongo = setup.$qwebs.resolve("$mongo");
             
-            let output = path.join(__dirname, "data/world.dest.png");
-            return Promise.resolve().then(() => {
-                if(fs.existsSync(output)) return fs.unlinkSync(output);
-            }).then(() => {
+    //         let output = path.join(__dirname, "data/world.dest.png");
+    //         return Promise.resolve().then(() => {
+    //             if(fs.existsSync(output)) return fs.unlinkSync(output);
+    //         }).then(() => {
 
-                return $mongo.gridFSBucket({bucketName: "images"}).then(bucket => {
-                    return bucket.openDownloadStreamByName("test.png");
-                }).then(downloadStream => {
-                    downloadStream.once("end", () => {
-                        console.log("Completed");
-                        done();
-                    });
-                    return downloadStream;
-                }).then(downloadStream => {
-                    downloadStream.pipe(fs.createWriteStream(output));
-                });
-            });
+    //             return $mongo.gridFSBucket({bucketName: "images"}).then(bucket => {
+    //                 return bucket.openDownloadStreamByName("test.png");
+    //             }).then(downloadStream => {
+    //                 downloadStream.once("end", () => {
+    //                     console.log("Completed");
+    //                     done();
+    //                 });
+    //                 return downloadStream;
+    //             }).then(downloadStream => {
+    //                 downloadStream.pipe(fs.createWriteStream(output));
+    //             });
+    //         });
             
-        }).catch(error => {
-            expect(error.stack).toBeNull();
-        }).then(done);
-    });
+    //     }).catch(error => {
+    //         expect(error.stack).toBeNull();
+    //     }).then(done);
+    // });
 });
