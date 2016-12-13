@@ -15,7 +15,6 @@ const Qwebs = require("qwebs");
 
 class Setup {
     constructor() {
-        console.log("Create setup")
         this.$qwebs = new Qwebs({dirname: __dirname});
         this.$qwebs.inject("$mongo", "./../index"); 
     };
@@ -89,7 +88,7 @@ class Setup {
     teardown() {
         let $mongo = this.$qwebs.resolve("$mongo");
         $mongo.close();
-    }
+    };
 };
 
 exports = module.exports = new Setup();
