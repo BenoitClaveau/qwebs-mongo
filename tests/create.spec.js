@@ -19,9 +19,11 @@ describe("A suite for create operations", () => {
             let $mongo = setup.$qwebs.resolve("$mongo");
             return $mongo.db;
         }).then(db => {
-            expect(db.databaseName).toEqual("");
+            expect(db.databaseName).toEqual("test");
         }).catch(error => {
             expect(error.stack).toBeNull();
+        }).then(() => {
+            setup.teardown();
         }).then(done);
     });
 
@@ -34,20 +36,25 @@ describe("A suite for create operations", () => {
                 login: "paul",
                 password: "1234"
             };
-            return db.collection("users").insertOne(user).then(data => {
-                console.log(data)
-                expect(data).toEqual("");
-            }); 
+            let collection = db.collection("users");
+            return collection.insertOne(user).then(data => {
+                expect(data.results.ok).toEqual(1);
+                expect(data.ops[0].login).toEqual("paul");
+                expect(data.ops[0].password).toEqual("1234");
+                expect(data.ops[0]._id).not.toBeUndefined();
+            }).then(() => {
+                return collection.deleteOne({id: data.ops[0]._id}).then(data => {
+                    console.log(data)
+                    expect(data.results.ok).toEqual(1);
+                });
+            });
         }).catch(error => {
             expect(error.stack).toBeNull();
+        }).then(() => {
+            setup.teardown();
         }).then(done);
     });
-        
-    it("teardown", done => {
-        setup.teardown();
-        done();
-    });
-    
+
     // it("crud", done => {
         
     //     return Promise.resolve().then(() => {
