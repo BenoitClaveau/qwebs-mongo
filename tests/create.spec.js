@@ -24,7 +24,7 @@ describe("A suite for create operations", () => {
     });
 
     it("teardown", done => {
-        setup.stop();
+        setup.teardown();
         done();
     });
     
