@@ -19,15 +19,30 @@ describe("A suite for create operations", () => {
             let $mongo = setup.$qwebs.resolve("$mongo");
             return $mongo.db;
         }).then(db => {
-            expect(db).not.toBeNull();
-            console.log(db);
-            console.log(typeof db);
+            expect(db.databaseName).toEqual("");
         }).catch(error => {
-            console.log(error)
             expect(error.stack).toBeNull();
         }).then(done);
     });
 
+    it("insertOne", done => {
+        return setup.run().then(() => {
+            let $mongo = setup.$qwebs.resolve("$mongo");
+            return $mongo.db;
+        }).then(db => {
+            let user = {
+                login: "paul",
+                password: "1234"
+            };
+            return db.collection("users").insertOne(user).then(data => {
+                console.log(data)
+                expect(data).toEqual("");
+            }); 
+        }).catch(error => {
+            expect(error.stack).toBeNull();
+        }).then(done);
+    });
+        
     it("teardown", done => {
         setup.teardown();
         done();
