@@ -20,7 +20,8 @@ describe("A suite for create operations", () => {
             return $mongo.db;
         }).then(db => {
             expect(db).not.toBeNull();
-            console.log("COOOL");
+            console.log(db);
+            console.log(typeof db);
         }).catch(error => {
             console.log(error)
             expect(error.stack).toBeNull();
