@@ -39,8 +39,10 @@ class MyService {
   };
 
   insert(request, response) {
-    return self.$mongo.insert("collectionName", request.body).then(data => {
-      return response.send({ request: request, content: data });
+    return this.$mongo.db.then(db => {
+      db.collection("collectionName").insertOne(request.body).then(data => {
+        return response.send({ request: request, content: data });
+      });
     });
   );
 };
