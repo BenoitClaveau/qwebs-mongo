@@ -38,8 +38,7 @@ describe("A suite for create operations", () => {
             };
             let collection = db.collection("users");
             return collection.insertOne(user).then(data => {
-                console.log("data", data)
-                expect(data.results.ok).toEqual(1);
+                expect(data.result.ok).toEqual(1);
                 expect(data.ops[0].login).toEqual("paul");
                 expect(data.ops[0].password).toEqual("1234");
                 expect(data.ops[0]._id).not.toBeUndefined();
