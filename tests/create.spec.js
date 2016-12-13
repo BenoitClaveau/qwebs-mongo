@@ -18,7 +18,11 @@ describe("A suite for create operations", () => {
         return setup.run().then(() => {
             let $mongo = setup.$qwebs.resolve("$mongo");
             return $mongo.db;
+        }).then(db => {
+            expect(db).not.toBeNull();
+            console.log("COOOL");
         }).catch(error => {
+            console.log(error)
             expect(error.stack).toBeNull();
         }).then(done);
     });
