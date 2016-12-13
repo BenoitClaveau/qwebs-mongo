@@ -15,13 +15,17 @@ const util = require("util");
 describe("A suite for create operations", () => {
 
     it("setup", done => {
-  
         return setup.run().then(() => {
             let $mongo = setup.$qwebs.resolve("$mongo");
             return $mongo.db;
         }).catch(error => {
             expect(error.stack).toBeNull();
         }).then(done);
+    });
+
+    it("teardown", done => {
+        setup.stop();
+        done();
     });
     
     // it("crud", done => {

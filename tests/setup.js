@@ -54,8 +54,8 @@ class Setup {
         let $mongo = this.$qwebs.resolve("$mongo");
         
         return Promise.all([
-            $mongo.db.createCollection("users"),
-            $mongo.db.ensureIndex("users", { "login": 1 })               
+            $mongo.db.then(db => db.createCollection("users")),
+            $mongo.db.then(db => db.ensureIndex("users", { "login": 1 }))               
         ]);
     };
     
@@ -77,17 +77,22 @@ class Setup {
     };
 
     clear() {
+
         let $mongo = this.$qwebs.resolve("$mongo");
         
         let promises = [];
         
-        [$mongo.db.remove("users")].forEach(promise => {
+        [$mongo.db.then(db => db.collection("users").remove())].forEach(promise => {
             promises.push(promise.catch(error => {
                 console.log("Warning", error.message);
             }));
         });
         return Promise.all(promises);
     };
+
+    end() {
+        $mongo.close();
+    }
 };
 
 exports = module.exports = new Setup();
