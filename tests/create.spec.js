@@ -42,7 +42,7 @@ describe("A suite for create operations", () => {
                 expect(data.ops[0].login).toEqual("paul");
                 expect(data.ops[0].password).toEqual("1234");
                 expect(data.ops[0]._id).not.toBeUndefined();
-            }).then(() => {
+
                 return collection.deleteOne({_id: data.ops[0]._id}).then(data => {
                     console.log("data", data)
                 });
