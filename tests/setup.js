@@ -45,6 +45,7 @@ class Setup {
             let $mongo = this.$qwebs.resolve("$mongo");
             
             if ($config.mongo.connectionString !== "mongodb://localhost:27017/test") throw new DataError({ message: "Inconherent mongo connectionString." });
+            console.log("call mongo.db", $mongo);
             return $mongo.db;
         });
     };

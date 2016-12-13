@@ -12,7 +12,7 @@ const fs = require("fs");
 const stream = require("stream");
 const util = require("util");
 
-describe("A suite for crud operations", () => {
+describe("A suite for create operations", () => {
 
     it("setup", done => {
   
