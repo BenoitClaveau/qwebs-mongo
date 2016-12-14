@@ -11,9 +11,9 @@
   * [Mongo API](http://mongodb.github.io/node-mongodb-native/2.2/api/)
   * Singleton
 
-```json
+```js
 return $mongo.db.then(db => {
-  //db is a Mongo Db instance
+  //db is a singleton Mongo Db instance
 });
 ```
 
@@ -29,6 +29,16 @@ return $mongo.db.then(db => {
 
 ### Declare and inject $mongo
 
+#### Via route.json
+```json
+{
+  "services": [
+    { "name": "$mongo", "location": "qwebs-mongo" }
+  ]
+}
+```
+
+#### Or in javascript
 ```js
 const Qwebs = require("qwebs");
 const qwebs = new Qwebs();

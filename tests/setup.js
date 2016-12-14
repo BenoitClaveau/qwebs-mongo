@@ -61,7 +61,34 @@ class Setup {
         return Promise.resolve().then(() => {
             
             let $mongo = this.$qwebs.resolve("$mongo");
-            
+            return $mongo.db;
+        }).then(db => {
+            let user = {
+                login: "paul",
+                password: "1234"
+            };
+            return db.collection("users").insertOne(user).then(data => {
+                let commands = [
+                    {
+                        ref: "ref001",
+                        userId: data.ops[0]._id,
+                        price: 9.99,
+                        date: new Date()
+                    }, {
+                        ref: "ref002",
+                        userId: data.ops[0]._id,
+                        price: 12.14,
+                        date: new Date()
+                    }
+                ];
+                return db.collection("commands").insertMany(commands);
+            });
+        }).then(db => {
+            let user = {
+                login: "henri",
+                password: "pwd"
+            };
+            return db.collection("users").insertOne(user);
         }).then(() => {
             console.log("-------------------------------------------------");
             console.log("data injection completed");
@@ -77,7 +104,8 @@ class Setup {
     clear() {
         let $mongo = this.$qwebs.resolve("$mongo");
         let promises = [];
-        [$mongo.db.then(db => db.collection("users").remove())].forEach(promise => {
+        [$mongo.db.then(db => db.collection("users").remove()),
+         $mongo.db.then(db => db.collection("commands").remove())].forEach(promise => {
             promises.push(promise.catch(error => {
                 console.log("Warning", error.message);
             }));

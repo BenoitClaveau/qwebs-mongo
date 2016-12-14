@@ -20,6 +20,8 @@ describe("A suite for db property", () => {
 
             let $mongo = setup.$qwebs.resolve("$mongo");
             return $mongo.db;
+        }).then(() => {
+            console.log("ARGGGG")
         }).catch(error => {
             expect(error.message).toBeNull();
         }).then(() => {
