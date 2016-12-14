@@ -8,9 +8,6 @@
 const path = require("path");
 const setup = require("./setup");
 const ObjectId = require("mongodb").ObjectID;
-const fs = require("fs");
-const stream = require("stream");
-const util = require("util");
 
 describe("A suite for create operations", () => {
 

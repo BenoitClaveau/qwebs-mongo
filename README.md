@@ -1,5 +1,5 @@
 # qwebs-mongo
-[Mongo](https://www.npmjs.com/package/mongodb) service build with [Promises](https://www.npmjs.com/package/q) for [Qwebs server](https://www.npmjs.com/package/qwebs).
+[Mongo](https://www.npmjs.com/package/mongodb) service for [Qwebs server](https://www.npmjs.com/package/qwebs).
 
  [![NPM][npm-image]][npm-url]
  [![Build Status][travis-image]][travis-url]
@@ -8,9 +8,15 @@
 ## Features
 
   * [Qwebs](https://www.npmjs.com/package/qwebs)
-  * [Mongo](https://www.npmjs.com/package/mongodb)
-  * [Promises](https://www.npmjs.com/package/q)
-    
+  * [Mongo API](http://mongodb.github.io/node-mongodb-native/2.2/api/)
+  * Singleton
+
+```json
+return $mongo.db.then(db => {
+  //db is a Mongo Db instance
+});
+```
+
 ### Add the mongo connection string in config.json
 
 ```json
@@ -49,28 +55,6 @@ class MyService {
 
 exports = module.exports = MyService; //Return a class. Qwebs will instanciate it;
 ```
-
-## Promise API
-
-  * connect()
-  * createCollection(collectionName)
-  * drop(collectionName)
-  * ensureIndex(collectionName, index, options)
-  * dropIndex(collectionName, index)
-  * gridStore(objectId, mode, options)
-  * gridFsBusket(options)
-  * insert(collectionName, item)
-  * update(collectionName, criteria, update, option)
-  * remove(collectionName, selector)
-  * findOne(collectionName, query, fields)
-  * find(collectionName, query, options)
-  * find2(collectionName, query, meta, options) for meta like textScore
-  * count(collectionName, query, options)
-  * geoNear(collectionName, x, y, options)
-  * aggregate(collectionName, array)
-  * mapReduce(collectionName, map, reduce, options)
-  * initializeUnorderedBulkOp(collectionName)
-  * [Mongo native API](http://mongodb.github.io/node-mongodb-native/2.1/api/)
 
 ## Installation
 
