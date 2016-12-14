@@ -21,7 +21,7 @@ describe("A suite for db property", () => {
         }).then(() => {
             throw new Error("The test should have failed.");
         }).catch(error => {
-            expect(error.message).toBeNull();
+            expect(error.message).toEqual("invalid schema, expected mongodb");
         }).then(() => {
             setup.teardown();
         }).then(done);
