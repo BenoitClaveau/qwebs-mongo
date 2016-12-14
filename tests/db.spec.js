@@ -19,7 +19,7 @@ describe("A suite for db property", () => {
             $mongo.close(); //remove setup initialization
             return $mongo.db;
         }).then(() => {
-            throw new Error("The test should have failed.");
+            throw new Error("Cannot read property 'connectionString' of null");
         }).catch(error => {
             expect(error.message).toEqual("invalid schema, expected mongodb");
         }).then(() => {
