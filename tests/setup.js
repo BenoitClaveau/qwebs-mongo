@@ -59,7 +59,6 @@ class Setup {
     
     injectData() {
         return Promise.resolve().then(() => {
-            
             let $mongo = this.$qwebs.resolve("$mongo");
             return $mongo.db;
         }).then(db => {
@@ -82,13 +81,13 @@ class Setup {
                     }
                 ];
                 return db.collection("commands").insertMany(commands);
+            }).then(() => {
+                let user = {
+                    login: "henri",
+                    password: "pwd"
+                };
+                return db.collection("users").insertOne(user);
             });
-        }).then(db => {
-            let user = {
-                login: "henri",
-                password: "pwd"
-            };
-            return db.collection("users").insertOne(user);
         }).then(() => {
             console.log("-------------------------------------------------");
             console.log("data injection completed");
