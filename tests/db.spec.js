@@ -15,13 +15,11 @@ describe("A suite for db property", () => {
         return setup.run().then(() => {
             let $config = setup.$qwebs.resolve("$config");
             $config.mongo.connectionString = "dummy"; //replace mongo config
-            console.log("$config", $config)
-            console.log("qwebs $config", setup.$qwebs.resolve("$config"))
-
             let $mongo = setup.$qwebs.resolve("$mongo");
+            $mongo.close(); //remove setup initialization
             return $mongo.db;
         }).then(() => {
-            console.log("ARGGGG")
+            throw new Error("The test should have failed.");
         }).catch(error => {
             expect(error.message).toBeNull();
         }).then(() => {
