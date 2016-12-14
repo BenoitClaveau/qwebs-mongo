@@ -15,6 +15,8 @@ describe("A suite for db property", () => {
         return setup.run().then(() => {
             let $config = setup.$qwebs.resolve("$config");
             $config.mongo = {}; //remove mongo config
+            console.log("$config", $config)
+            console.log("qwebs $config", setup.$qwebs.resolve("$config"))
 
             let $mongo = setup.$qwebs.resolve("$mongo");
             return $mongo.db;
