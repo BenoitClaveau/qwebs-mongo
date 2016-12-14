@@ -61,7 +61,8 @@ describe("A suite for create operations", () => {
                 expect(data.length).toEqual(2);
                 expect(data[0].login).toEqual("paul");
                 expect(data[1].login).toEqual("henri");
-                console.log(data); //call inspect
+                console.log(JSON.stringify(data)); //call inspect ObjectId
+                console.log(data); 
             });
         }).catch(error => {
             expect(error.stack).toBeNull();

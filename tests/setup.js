@@ -95,8 +95,8 @@ class Setup {
             console.log("-------------------------------------------------");
         }).catch(error => {
             console.log("-------------------------------------------------");
-            if(e.data) console.log("Error:", e.message, JSON.stringify(e.data), e.stack);
-            else console.log("Error:", e.message, e.stack);
+            if(error.data) console.log("Error:", error.message, JSON.stringify(error.data), error.stack);
+            else console.log("Error:", error.message, error.stack);
             console.log("-------------------------------------------------");
         });
     };
