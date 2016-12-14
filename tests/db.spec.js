@@ -14,7 +14,7 @@ describe("A suite for db property", () => {
     it("config error", done => {
         return setup.run().then(() => {
             let $config = setup.$qwebs.resolve("$config");
-            $config.mongo.connectionString = "dummy"; //replace mongo config
+            $config.mongo = null; //replace mongo config to generate an exception
             let $mongo = setup.$qwebs.resolve("$mongo");
             $mongo.close(); //remove setup initialization
             return $mongo.db;
