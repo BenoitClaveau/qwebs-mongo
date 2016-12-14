@@ -41,7 +41,8 @@ describe("A suite for create operations", () => {
                 expect(data.ops[0]._id).not.toBeUndefined();
 
                 return collection.deleteOne({_id: data.ops[0]._id}).then(data => {
-                    console.log("data", data)
+                    expect(data.result.ok).toEqual(1);
+                    expect(data.result.n).toEqual(1);
                 });
             });
         }).catch(error => {
