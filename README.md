@@ -30,7 +30,7 @@ return $mongo.db.then(db => {
 ### Declare and inject $mongo
 
 #### Via route.json
-```json
+```routes.json
 {
   "services": [
     { "name": "$mongo", "location": "qwebs-mongo" }
