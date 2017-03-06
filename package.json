@@ -5,6 +5,7 @@
     "main": "index.js",
     "dependencies": {
         "mongodb": "latest",
+        "pluralize": "latest",
         "qwebs": "^0.1.79"
     },
     "devDependencies": {
