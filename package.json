@@ -1,12 +1,12 @@
 {
     "name": "qwebs-mongo",
-    "version": "0.1.96",
+    "version": "0.2.18",
     "description": "Mongo client for your Qwebs server",
     "main": "index.js",
     "dependencies": {
         "mongodb": "latest",
         "pluralize": "latest",
-        "qwebs": "^0.1.96"
+        "qwebs": "^0.2.18"
     },
     "devDependencies": {
         "jasmine-node": "latest",
