@@ -8,3 +8,4 @@
 
 module.exports = require('./lib/qwebs-mongo');
 module.exports.CRUD = require('./lib/services/crud');
+module.exports.CRUDAuth = require('./lib/services/crud-auth');

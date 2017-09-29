@@ -27,7 +27,7 @@ return $mongo.db.then(db => {
 }
 ```
 
-### Declare and inject $mongo
+### Declare and inject $mongo service
 
 #### Via route.json
 ```routes.json
@@ -42,28 +42,51 @@ return $mongo.db.then(db => {
 ```js
 const Qwebs = require("qwebs");
 const qwebs = new Qwebs();
-
 qwebs.inject("$mongo" ,"qwebs-mongo");
 ```
 
 ### Use $mongo service
 
+#### Hight level api
+
 ```js
-class MyService {
+const { CRUD } = require("qwebs-mongo");
+
+class Api extends CRUD {
+    constructor($mongo) {
+        super("collectionName", $mongo);
+    };
+
+    /* manage skip and limit as querystring */
+    httpStream(request, response) {
+        request.mongo = {   //define mongo query, options,...
+            options: {
+              limit: parseInt(request.query.limit),
+              skip: parseInt(request.query.skip)
+            }
+        }
+        return super.httpStream(request, response);
+    }
+```
+
+#### Low level api
+
+```js
+/* no extend -> custom implementation */
+class Api {
   constructor($mongo) {
     this.$mongo = $mongo;
   };
 
-  insert(request, response) {
+  httpStream(request, response) {
     return this.$mongo.db.then(db => {
-      db.collection("collectionName").insertOne(request.body).then(data => {
-        return response.send({ request: request, content: data });
-      });
+      const limit = parseInt(request.query.limit);
+      const skip = parseInt(request.query.skip);
+      const stream = db.collection("collectionName").find({}).limit(limit).skip(skip).stream();
+      return response.send({ request: request, stream: stream });
     });
   );
 };
-
-exports = module.exports = MyService; //Return a class. Qwebs will instanciate it;
 ```
 
 ## Installation
