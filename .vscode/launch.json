@@ -1,0 +1,15 @@
+{
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "type": "node",
+                "request": "launch",
+                "name": "Tests",
+                "program": "${workspaceRoot}/node_modules/jasmine/bin/jasmine",
+                "args": [
+                  "${workspaceRoot}/tests/*.spec.js"
+                ],
+                "cwd": "${workspaceRoot}"
+              }
+        ]
+    }

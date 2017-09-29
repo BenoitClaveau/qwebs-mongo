@@ -11,24 +11,11 @@ const ObjectId = require("mongodb").ObjectID;
 
 describe("A suite for create operations", () => {
 
-    it("setup", done => {
-        return setup.run().then(() => {
-            let $mongo = setup.$qwebs.resolve("$mongo");
-            return $mongo.db;
-        }).then(db => {
-            expect(db.databaseName).toEqual("test");
-        }).catch(error => {
-            expect(error.stack).toBeNull();
-        }).then(() => {
-            setup.teardown();
-        }).then(done);
-    });
+    beforeAll(setup.run.bind(setup));
+    afterAll(setup.stop.bind(setup));
 
     it("insertOne & deleteOne", done => {
-        return setup.run().then(() => {
-            let $mongo = setup.$qwebs.resolve("$mongo");
-            return $mongo.db;
-        }).then(db => {
+        return setup.$qwebs.resolve("$mongo").db.then(db => {
             let user = {
                 login: "jean-pierre",
                 password: "1234"
@@ -45,69 +32,41 @@ describe("A suite for create operations", () => {
                     expect(data.result.n).toEqual(1);
                 });
             });
-        }).catch(error => {
-            expect(error.stack).toBeNull();
-        }).then(() => {
-            setup.teardown();
-        }).then(done);
+        }).then(done).catch(fail);
     });
 
     it("toArray", done => {
-        return setup.run().then(() => {
-            let $mongo = setup.$qwebs.resolve("$mongo");
-            return $mongo.db;
-        }).then(db => {
+        return setup.$qwebs.resolve("$mongo").db.then(db => {
             db.collection("users").find({}).toArray().then(data => {
                 expect(data.length).toEqual(2);
                 expect(data[0].login).toEqual("paul");
                 expect(data[1].login).toEqual("henri");
-                console.log(JSON.stringify(data)); //call inspect ObjectId
-                console.log(data); 
             });
-        }).catch(error => {
-            expect(error.stack).toBeNull();
-        }).then(() => {
-            setup.teardown();
-        }).then(done);
+        }).then(done).catch(fail);
     });
 
     it("toArray skip limit", done => {
-        return setup.run().then(() => {
-            let $mongo = setup.$qwebs.resolve("$mongo");
-            return $mongo.db;
-        }).then(db => {
+        return setup.$qwebs.resolve("$mongo").db.then(db => {
             db.collection("users").find({}).skip(1).limit(1).toArray().then(data => {
                 expect(data.length).toEqual(1);
                 expect(data[0].login).toEqual("henri");
             });
-        }).catch(error => {
-            expect(error.stack).toBeNull();
-        }).then(() => {
-            setup.teardown();
-        }).then(done);
+        }).then(done).catch(fail);
     });
 
     it("stream", done => {
-        return setup.run().then(() => {
-            let $mongo = setup.$qwebs.resolve("$mongo");
-            return $mongo.db;
-        }).then(db => {
+        return setup.$qwebs.resolve("$mongo").db.then(db => {
             return new Promise((resolve, reject) => {
                 let stream = db.collection("users").find({}).stream();
                 let results = [];
                 stream.on('data', item => {
-                    console.log(item);
                     results.push(item);
                 }).on('end', () => {
                     expect(results.length).toEqual(2);
                     resolve();
                 }).on('error', reject);
             });
-        }).catch(error => {
-            expect(error.stack).toBeNull();
-        }).then(() => {
-            setup.teardown();
-        }).then(done);
+        }).then(done).catch(fail);
     });
 });
 

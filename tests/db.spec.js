@@ -11,19 +11,12 @@ const ObjectId = require("mongodb").ObjectID;
 
 describe("A suite for db property", () => {
 
-    it("config error", done => {
-        return setup.run().then(() => {
-            let $config = setup.$qwebs.resolve("$config");
-            $config.mongo = null; //replace mongo config to generate an exception
-            let $mongo = setup.$qwebs.resolve("$mongo");
-            $mongo.close(); //remove setup initialization
-            return $mongo.db;
-        }).then(() => {
-            throw new Error();
-        }).catch(error => {
-            expect(error.message).toEqual("Cannot read property 'connectionString' of null");
-        }).then(() => {
-            setup.teardown();
-        }).then(done);
+    beforeAll(setup.run.bind(setup));
+    afterAll(setup.stop.bind(setup));
+
+    it("setup", done => {
+        return setup.$qwebs.resolve("$mongo").db.then(db => {
+            expect(db.databaseName).toEqual("test");
+        }).then(done).catch(fail);
     });
 });

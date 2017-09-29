@@ -6,10 +6,10 @@
     "dependencies": {
         "mongodb": "latest",
         "pluralize": "latest",
-        "qwebs": "^0.2.18"
+        "qwebs": "^0.2.22"
     },
     "devDependencies": {
-        "jasmine-node": "latest",
+        "jasmine": "latest",
         "coveralls": "latest",
         "istanbul": "latest"
     },

@@ -19,7 +19,7 @@ class Setup {
         this.$qwebs.inject("$mongo", "./../index"); 
     };
 
-    run() {
+    run(done) {
         return this.loadQwebs().then(() => {
             return this.mongoConnect();
         }).then(() => {
@@ -30,7 +30,7 @@ class Setup {
             return this.injectData();
         }).then(() => {
             return this;
-        });
+        }).then(done).catch(fail);
     };
 
     loadQwebs() {
@@ -88,15 +88,6 @@ class Setup {
                 };
                 return db.collection("users").insertOne(user);
             });
-        }).then(() => {
-            console.log("-------------------------------------------------");
-            console.log("data injection completed");
-            console.log("-------------------------------------------------");
-        }).catch(error => {
-            console.log("-------------------------------------------------");
-            if(error.data) console.log("Error:", error.message, JSON.stringify(error.data), error.stack);
-            else console.log("Error:", error.message, error.stack);
-            console.log("-------------------------------------------------");
         });
     };
 
@@ -106,13 +97,13 @@ class Setup {
         [$mongo.db.then(db => db.collection("users").remove()),
          $mongo.db.then(db => db.collection("commands").remove())].forEach(promise => {
             promises.push(promise.catch(error => {
-                console.log("Warning", error.message);
+                console.warn(error.message);
             }));
         });
         return Promise.all(promises);
     };
 
-    teardown() {
+    stop() {
         let $mongo = this.$qwebs.resolve("$mongo");
         $mongo.close();
     };
