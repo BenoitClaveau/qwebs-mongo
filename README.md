@@ -104,7 +104,7 @@ $ git clone https://github.com/BenoitClaveau/qwebs-mongo --depth 1
 $ cd qwebs-mongo
 $ npm install
 $ mongod --dbpath ./data/db
-$ node.exe "..\node_modules\jasmine-node\bin\jasmine-node" --verbose tests
+$ node.exe "../node_modules/mocha/bin/mocha" tests
 ```
 
 [npm-image]: https://img.shields.io/npm/v/qwebs-mongo.svg
