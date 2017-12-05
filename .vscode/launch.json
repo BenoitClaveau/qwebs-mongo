@@ -1,15 +1,22 @@
 {
-        "version": "0.2.0",
-        "configurations": [
-            {
-                "type": "node",
-                "request": "launch",
-                "name": "Tests",
-                "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-                "args": [
-                  "${workspaceRoot}/tests"
-                ],
-                "cwd": "${workspaceRoot}"
-              }
-        ]
-    }
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Server",
+        "program": "${workspaceRoot}/server.js"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Tests",
+        "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+        "args": [
+          "--recursive",
+          "${workspaceRoot}/tests/gridfs.spec.js"
+        ],
+        "cwd": "${workspaceRoot}"
+      }
+    ]
+  }

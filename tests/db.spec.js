@@ -5,18 +5,24 @@
  */
 "use strict"
 
-const path = require("path");
 const setup = require("./setup");
-const ObjectId = require("mongodb").ObjectID;
+const expect = require("expect.js");
 
-describe("A suite for db property", () => {
+describe("A suite for mongo", () => {
 
-    beforeAll(setup.run.bind(setup));
-    afterAll(setup.stop.bind(setup));
+    before(async () => await setup.run())
+    after(async () => await setup.stop())
 
-    it("setup", done => {
-        return setup.$qwebs.resolve("$mongo").db.then(db => {
-            expect(db.databaseName).toEqual("test");
-        }).then(done).catch(fail);
+    it("connect", async () => {
+        const mongo = await setup.qwebs.resolve("$mongo");
+        let db = await mongo.connect();
+        expect(db.databaseName).to.be("test");
+    });
+
+    it("find", async () => {
+        const mongo = await setup.qwebs.resolve("$mongo");
+        let db = await mongo.connect();
+        const docs = await db.collection("users").find().toArray();
+        expect(docs.length).to.be(2);
     });
 });
