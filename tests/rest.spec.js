@@ -14,7 +14,7 @@ describe("A suite for CRUD", () => {
     before(async () => await setup.run())
     after(async () => await setup.stop())
 
-    it("httpFind", async () => {
+    it("find", async () => {
         const { qwebs } = setup;
         const client = await qwebs.resolve("$client");
         const res = await client.get({ url: "http://localhost:3100/users", json: true });

@@ -14,7 +14,7 @@ describe("A suite for CRUDAuth", () => {
     before(async () => await setup.run())
     after(async () => await setup.stop())
 
-    it("httpFind", async () => {
+    it("find", async () => {
         const { qwebs } = setup;
         const auth = await qwebs.resolve("$auth");
         const token = auth.encode({ login: "paul" });
@@ -24,7 +24,7 @@ describe("A suite for CRUDAuth", () => {
         expect(res.body.length).to.be(2);
     });
 
-    it("httpFind 401", async () => {
+    it("find 401", async () => {
         const { qwebs } = setup;
         const client = await qwebs.resolve("$client");
         try {

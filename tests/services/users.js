@@ -5,9 +5,9 @@
 */
 const Writable = require('stream').Writable;
 const Readable = require('stream').Readable;
-const CRUD = require("../../lib/services/crud");
+const Rest = require("../../lib/services/rest");
 
-class Users extends CRUD {
+class Users extends Rest {
 	constructor($mongo) {
 		super("users", $mongo)
 	};

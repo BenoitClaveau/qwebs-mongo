@@ -7,5 +7,6 @@
 'use strict';
 
 module.exports = require('./lib/qwebs-mongo');
-module.exports.CRUD = require('./lib/services/crud');
-module.exports.CRUDAuth = require('./lib/services/crud-auth');
+module.exports.Crud = require('./lib/services/crud');
+module.exports.Rest = require('./lib/services/rest');
+module.exports.RestAuth = require('./lib/services/rest-auth');
