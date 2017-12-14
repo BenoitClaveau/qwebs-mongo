@@ -9,4 +9,3 @@
 module.exports = require('./lib/qwebs-mongo');
 module.exports.Crud = require('./lib/services/crud');
 module.exports.Rest = require('./lib/services/rest');
-module.exports.RestAuth = require('./lib/services/rest-auth');
