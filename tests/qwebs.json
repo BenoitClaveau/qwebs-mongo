@@ -1,5 +1,4 @@
 {
-    "services": "./services.json",
     "mongo": {
         "connectionString": "mongodb://localhost:27017/test"
     },

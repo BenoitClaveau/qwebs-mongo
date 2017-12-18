@@ -19,7 +19,6 @@ class Setup {
         const { qwebs } = this;
         await qwebs.inject("$mongo", path.join(__dirname, "..", "index"));
         await qwebs.inject("$http", "qwebs-http");
-        await qwebs.inject("$auth", "qwebs-auth-jwt");
         await qwebs.load();
         
         const config = await qwebs.resolve("$config");
