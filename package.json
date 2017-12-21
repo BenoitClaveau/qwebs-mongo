@@ -6,7 +6,6 @@
     "dependencies": {
         "oups": "latest",
         "mongodb": "latest",
-        "pluralize": "latest",
         "qwebs": "^1.0.0-beta.0"
     },
     "devDependencies": {
