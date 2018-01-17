@@ -9,7 +9,7 @@ const setup = require("./setup");
 const Qwebs = require("qwebs");
 const expect = require("expect.js");
 
-describe("A suite for CRUD", () => {
+describe("A suite for Rest", () => {
 
     before(async () => await setup.run())
     after(async () => await setup.stop())

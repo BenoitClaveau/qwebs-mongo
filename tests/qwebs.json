@@ -1,11 +1,11 @@
 {
+    "services": "./services.json",
     "mongo": {
-        "connectionString": "mongodb://localhost:27017/test"
+        "host": "localhost", 
+        "port": 27017, 
+        "database": "test"
     },
     "http": {
-        "port": 3100,
-        "jwt": {
-            "secret": "secret code"
-        }
+        "port": 3100
     }
 }

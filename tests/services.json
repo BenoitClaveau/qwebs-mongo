@@ -1,0 +1,8 @@
+{
+    "services": [
+        { "name": "$users", "location": "./services/users" }
+    ],
+    "http-routes": [
+        { "get": "/users", "service": "$users", "method": "httpFind", "auth": false }
+    ]
+}
