@@ -13,8 +13,7 @@
         "name": "Tests",
         "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
         "args": [
-          "--recursive",
-          "${workspaceRoot}/tests/**/*.spec.js"
+          "${workspaceRoot}/tests/rest.spec.js"
         ],
         "cwd": "${workspaceRoot}"
       }

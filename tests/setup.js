@@ -8,6 +8,7 @@
 const { Error } = require("oups");
 const Qwebs = require("qwebs");
 const path = require("path");
+const { inspect } = require("util");
 
 class Setup {
 
@@ -16,18 +17,24 @@ class Setup {
     }
 
     async run() {
-        const { qwebs } = this;
-        await qwebs.inject("$mongo", path.join(__dirname, "..", "index"));
-        await qwebs.inject("$http", "qwebs-http");
-        await qwebs.load();
-        
-        const config = await qwebs.resolve("$config");
-        if (config.mongo.host !== "localhost") throw new Error("Inconherent mongo connectionString.");
-        if (config.mongo.database !== "test") throw new Error("Inconherent mongo connectionString.");
+        try {
+            const { qwebs } = this;
+            await qwebs.inject("$mongo", path.join(__dirname, "..", "index"));
+            await qwebs.inject("$http", "qwebs-http");
+            await qwebs.load();
+            
+            const config = await qwebs.resolve("$config");
+            if (config.mongo.host !== "localhost") throw new Error("Inconherent mongo connectionString.");
+            if (config.mongo.database !== "test") throw new Error("Inconherent mongo connectionString.");
 
-        await this.clear();
-        await this.schema();
-        await this.data();
+            await this.clear();
+            await this.schema();
+            await this.data();
+        }
+        catch(error) {
+            console.error(inspect(error));
+            throw error;
+        }
     };
 
     async schema() {
