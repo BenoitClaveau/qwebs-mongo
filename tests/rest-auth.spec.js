@@ -8,6 +8,9 @@
 const setup = require("./setup");
 const Qwebs = require("qwebs");
 const expect = require("expect.js");
+process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at:', p, 'reason:', reason);
+});
 
 describe("A suite for CRUDAuth", () => {
 

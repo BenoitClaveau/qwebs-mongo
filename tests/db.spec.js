@@ -7,7 +7,11 @@
 
 const setup = require("./setup");
 const expect = require("expect.js");
-
+const process = require("process");
+process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at:', p, 'reason:', reason);
+});
+  
 describe("A suite for mongo", () => {
 
     before(async () => await setup.run())
