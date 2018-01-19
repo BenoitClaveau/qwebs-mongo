@@ -3,6 +3,8 @@
         { "name": "$users", "location": "./services/users" }
     ],
     "http-routes": [
-        { "get": "/users", "service": "$users", "method": "httpFind", "auth": false }
+        { "get": "/user", "service": "$users", "method": "myHttpFindOne", "auth": false },
+        { "get": "/users", "service": "$users", "method": "httpFind", "auth": false },
+        { "get": "/users2", "service": "$users", "method": "myHttpFind", "auth": false }
     ]
 }

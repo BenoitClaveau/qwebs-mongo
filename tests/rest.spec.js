@@ -8,8 +8,9 @@
 const setup = require("./setup");
 const Qwebs = require("qwebs");
 const expect = require("expect.js");
+const { inspect } = require("util");
 process.on('unhandledRejection', (reason, p) => {
-    console.log('Unhandled Rejection at:', p, 'reason:', reason);
+    console.error('Unhandled Rejection at:', p, 'reason:', inspect(reason));
 });
 
 describe("A suite for Rest", () => {
@@ -21,6 +22,14 @@ describe("A suite for Rest", () => {
         const { qwebs } = setup;
         const client = await qwebs.resolve("$client");
         const res = await client.get({ url: "http://localhost:3100/users", json: true });
+        expect(res.statusCode).to.be(200);
+        expect(res.body.length).to.be(2);
+    });
+
+    it("custom find", async () => {
+        const { qwebs } = setup;
+        const client = await qwebs.resolve("$client");
+        const res = await client.get({ url: "http://localhost:3100/users2", json: true });
         expect(res.statusCode).to.be(200);
         expect(res.body.length).to.be(2);
     });

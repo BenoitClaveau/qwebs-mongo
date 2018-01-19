@@ -8,8 +8,9 @@
 const setup = require("./setup");
 const Qwebs = require("qwebs");
 const expect = require("expect.js");
+const { inspect } = require("util");
 process.on('unhandledRejection', (reason, p) => {
-    console.log('Unhandled Rejection at:', p, 'reason:', reason);
+    console.error('Unhandled Rejection at:', p, 'reason:', inspect(reason));
 });
 
 describe("A suite for CRUD", () => {

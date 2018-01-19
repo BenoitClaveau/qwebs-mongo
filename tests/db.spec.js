@@ -8,8 +8,9 @@
 const setup = require("./setup");
 const expect = require("expect.js");
 const process = require("process");
+const { inspect } = require("util");
 process.on('unhandledRejection', (reason, p) => {
-    console.log('Unhandled Rejection at:', p, 'reason:', reason);
+    console.error('Unhandled Rejection at:', p, 'reason:', inspect(reason));
 });
   
 describe("A suite for mongo", () => {

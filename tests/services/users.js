@@ -11,6 +11,14 @@ class Users extends Rest {
 	constructor($mongo) {
 		super("users", $mongo)
 	};
+
+	myHttpFindOne(ask, reply) {
+		this.findOne({ login: "paul" }).pipe(reply);
+	}
+
+	myHttpFind(ask, reply) {
+		this.find().pipe(reply).on("data", data => console.log(data))
+	}
 };
 
 exports = module.exports = Users;
