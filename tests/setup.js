@@ -49,32 +49,18 @@ class Setup {
         const { qwebs } = this;
         const mongo = await qwebs.resolve("$mongo");
         const db = await mongo.connect();
-        let user = {
-            login: "paul",
-            password: "1234"
-        };
-        let res = await db.collection("users").insertOne(user)
-        let commands = [
-            {
-                ref: "ref001",
-                userId: res.ops[0]._id,
-                price: 9.99,
-                date: new Date()
-            }, {
-                ref: "ref002",
-                userId: res.ops[0]._id,
-                price: 12.14,
-                date: new Date()
-            }
-        ];
 
-        res = await db.collection("commands").insertMany(commands);
+        [
+            { login: "paul", password: "1234" },
+            { login: "henri", password: "mypass" },
+            { login: "pierre", password: "pass" },
+            { login: "jean-paul", password: "passw@rd" },
+            { login: "peter", password: "pan" },
+            { login: "parker", password: "tony" },
+        ].map(async user => {;
+            await db.collection("users").insertOne(user);
+        })
 
-        user = {
-            login: "henri",
-            password: "pwd"
-        };
-        res = await db.collection("users").insertOne(user);
     };
 
     async clear() {
@@ -82,7 +68,6 @@ class Setup {
         let mongo = await qwebs.resolve("$mongo");
         let db = await mongo.connect();
         await db.collection("users").remove();
-        await db.collection("commands").remove();
     };
 
     async stop() {

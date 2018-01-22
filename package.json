@@ -1,47 +1,47 @@
 {
-    "name": "qwebs-mongo",
-    "version": "1.0.0-beta.24",
-    "description": "Mongo client for your Qwebs server",
-    "main": "index.js",
-    "dependencies": {
-        "oups": "latest",
-        "mongodb": "latest",
-        "qwebs": "^1.0.0-beta.0"
-    },
-    "devDependencies": {
-        "qwebs-http": "^1.0.0-beta.0",
-        "coveralls": "latest",
-        "expect.js": "latest",
-        "istanbul": "latest",
-        "mocha": "latest",
-        "chalk": "latest"
-    },
-    "scripts": {
-        "mongod": "start mongod.exe --dbpath tests/data/db",
-        "pretest": "start mongod.exe --dbpath tests/data/db",
-        "test": "node node_modules/mocha/bin/mocha --recursive tests",
-        "test-cover": "node_modules/.bin/istanbul cover node_modules/mocha/bin/mocha --recursive tests"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/BenoitClaveau/qwebs-mongo.git"
-    },
-    "keywords": [
-        "qwebs",
-        "mongo",
-        "mongodb",
-        "client",
-        "web",
-        "database",
-        "promise"
-    ],
-    "author": {
-        "name": "Benoît Claveau",
-        "email": "benoit.claveau@gmail.com"
-    },
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/BenoitClaveau/qwebs-mongo/issues"
-    },
-    "homepage": "https://github.com/BenoitClaveau/qwebs-mongo"
+  "name": "qwebs-mongo",
+  "version": "1.0.0-beta.24",
+  "description": "Mongo client for your Qwebs server",
+  "main": "index.js",
+  "dependencies": {
+    "mongodb": "latest",
+    "oups": "latest",
+    "qwebs": "^1.0.0-beta.0"
+  },
+  "devDependencies": {
+    "qwebs-http": "^1.0.0-beta.0",
+    "coveralls": "latest",
+    "expect.js": "latest",
+    "istanbul": "latest",
+    "mocha": "latest",
+    "chalk": "latest"
+  },
+  "scripts": {
+    "mongod": "start mongod.exe --dbpath tests/data/db",
+    "pretest": "start mongod.exe --dbpath tests/data/db",
+    "test": "node node_modules/mocha/bin/mocha --recursive tests",
+    "test-cover": "node_modules/.bin/istanbul cover node_modules/mocha/bin/mocha --recursive tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BenoitClaveau/qwebs-mongo.git"
+  },
+  "keywords": [
+    "qwebs",
+    "mongo",
+    "mongodb",
+    "client",
+    "web",
+    "database",
+    "promise"
+  ],
+  "author": {
+    "name": "Benoît Claveau",
+    "email": "benoit.claveau@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BenoitClaveau/qwebs-mongo/issues"
+  },
+  "homepage": "https://github.com/BenoitClaveau/qwebs-mongo"
 }
