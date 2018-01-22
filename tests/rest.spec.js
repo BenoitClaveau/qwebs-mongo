@@ -26,11 +26,18 @@ describe("A suite for Rest", () => {
         expect(res.body.length).to.be(2);
     });
 
-    it("custom find", async () => {
+    xit("custom find", async () => {
         const { qwebs } = setup;
         const client = await qwebs.resolve("$client");
         const res = await client.get({ url: "http://localhost:3100/users2", json: true });
-        console.log("---------------")
+        expect(res.statusCode).to.be(200);
+        expect(res.body.length).to.be(6);
+    });
+
+    it("find with querystring", async () => {
+        const { qwebs } = setup;
+        const client = await qwebs.resolve("$client");
+        const res = await client.get({ url: "http://localhost:3100/users?login=^PA", json: true });
         expect(res.statusCode).to.be(200);
         expect(res.body.length).to.be(6);
     });

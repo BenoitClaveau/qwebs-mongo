@@ -16,6 +16,10 @@ class Setup {
         this.qwebs = new Qwebs({ dirname: __dirname });
     }
 
+    async resolve(name) {
+        return await this.qwebs.resolve(name);
+    }
+
     async run() {
         try {
             const { qwebs } = this;
