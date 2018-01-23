@@ -20,13 +20,15 @@ class Setup {
         return await this.qwebs.resolve(name);
     }
 
-    async run() {
+    async run(options = {}) {
+        const { mongo = true, http = true } = options;
         try {
             const { qwebs } = this;
-            await qwebs.inject("$mongo", path.join(__dirname, "..", "index"));
-            await qwebs.inject("$http", "qwebs-http");
+            if (mongo) await qwebs.inject("$mongo", path.join(__dirname, "..", "index"));
+            if (http) await qwebs.inject("$http", "qwebs-http");
             await qwebs.load();
             
+            if (!mongo)  return
             const config = await qwebs.resolve("$config");
             if (config.mongo.host !== "localhost") throw new Error("Inconherent mongo connectionString.");
             if (config.mongo.database !== "test") throw new Error("Inconherent mongo connectionString.");
@@ -55,12 +57,12 @@ class Setup {
         const db = await mongo.connect();
 
         [
-            { login: "paul", password: "1234" },
-            { login: "henri", password: "mypass" },
-            { login: "pierre", password: "pass" },
-            { login: "jean-paul", password: "passw@rd" },
-            { login: "peter", password: "pan" },
-            { login: "parker", password: "tony" },
+            { login: "paul", password: "1234", address: { city: "Paris"}},
+            { login: "henri", password: "mypass", address: { city: "Versailles"}},
+            { login: "pierre", password: "pass", address: { city: "Paris"}},
+            { login: "jean-paul", password: "passw@rd", address: { city: "Nantes"}},
+            { login: "peter", password: "pan", address: { city: "Bordeaux"}},
+            { login: "parker", password: "tony", address: { city: "Puteaux"}},
         ].map(async user => {;
             await db.collection("users").insertOne(user);
         })

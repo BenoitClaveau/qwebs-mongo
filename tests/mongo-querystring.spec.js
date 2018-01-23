@@ -17,20 +17,20 @@ process.on('unhandledRejection', (reason, p) => {
 
 describe("A suite for Rest", () => {
 
-    before(async () => await setup.run())
+    before(async () => await setup.run({ mongo: false, http: false }))
     after(async () => await setup.stop())
 
     it("parse", async () => {
         const qs = await setup.resolve("$mongo-querystring");
-        const query = qs.parse("name=peter");
-        expect(query.filter).to.eql({
-            name: "peter"
-        });
-    });
+        const query1 = qs.parse("name=peter&name=paul");
+        const query2 = qs.parse("person.name=/^paul/&name=peter&");
+
+        console.log("ok")
+    }).timeout(50000);
 
     it("parse", async () => {
         const qs = await setup.resolve("$mongo-querystring");
-        const query = qs.parse("price>10&limit=5");
+        const query = qs.parse("name=/^pa/");
         expect(query.filter).to.eql({
             price: {
                 $gt: 10
@@ -39,21 +39,21 @@ describe("A suite for Rest", () => {
         expect(query.limit).to.be(5);
     });
 
-    it("parse", async () => {
-        const qs = await setup.resolve("$mongo-querystring");
-        const query = qs.parse("price>10||price<5");
-        expect(query.filter).to.eql({
-            $or: [{
-                    price: {
-                        $gt: 10
-                    },
-                }, {
-                    price: {
-                        $lt: 5
-                    }
-                }
-            ]
-        });
-    });
+    // it("parse", async () => {
+    //     const qs = await setup.resolve("$mongo-querystring");
+    //     const query = qs.parse("price>10||price<5");
+    //     expect(query.filter).to.eql({
+    //         $or: [{
+    //                 price: {
+    //                     $gt: 10
+    //                 },
+    //             }, {
+    //                 price: {
+    //                     $lt: 5
+    //                 }
+    //             }
+    //         ]
+    //     });
+    // });
 
 });
