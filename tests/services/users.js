@@ -12,12 +12,12 @@ class Users extends Rest {
 		super($qwebs, "users")
 	};
 
-	myHttpFindOne(ask, reply) {
-		this.findOne({ login: "paul" }).pipe(reply);
+	myHttpFindOne(context, stream, headers) {
+		this.findOne({ login: "paul" }).pipe(stream);
 	}
 
-	myHttpFind(ask, reply) {
-		this.find().pipe(reply).on("data", data => console.log(data))
+	myHttpFind(context, stream, headers) {
+		this.find().pipe(stream).on("data", data => console.log(data))
 	}
 };
 
