@@ -6,7 +6,7 @@
   "dependencies": {
     "mongodb": "latest",
     "oups": "latest",
-    "pump": "^3.0.0",
+    "pump": "latest",
     "qwebs": "^1.0.0-beta.0"
   },
   "devDependencies": {
