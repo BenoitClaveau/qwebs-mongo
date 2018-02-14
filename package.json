@@ -1,12 +1,12 @@
 {
   "name": "qwebs-mongo",
-  "version": "1.0.0-beta.33",
+  "version": "1.0.0-beta.34",
   "description": "Mongo client for your Qwebs server",
   "main": "index.js",
   "dependencies": {
     "mongodb": "latest",
     "oups": "latest",
-    "pump": "latest",
+    "pump": "github:BenoitClaveau/pump",
     "qwebs": "^1.0.0-beta.0"
   },
   "devDependencies": {
