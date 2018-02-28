@@ -5,7 +5,10 @@
  */
 
 'use strict';
+const {streamify, streamifyOne} = require('./lib/services/streamify');
 
 module.exports = require('./lib/qwebs-mongo');
 module.exports.Crud = require('./lib/services/crud');
 module.exports.Rest = require('./lib/services/rest');
+module.exports.streamify = streamify;
+module.exports.streamifyOne = streamifyOne;
